@@ -1,25 +1,40 @@
 # Cell Society Design Discussion
-### Team Number
+### Team Number: 4
+
 ### Names
 
-
+### Ian Flynn, Arman Shekarriz, Diego Miranda, David Lu
 
 ## Cellular Automata
 
 #### Commonalities
 
+Each Automata requires maintaining a  rectangular grid with square cells, with the behavior of each cell being determined by its surrounding neighbors.
+The behavior of the CA is only affected by the previous state rather than the entire history.
+Each cell has a few finite, discrete states.
 
 #### Variations
 
+The variations of a cell society are typically within the rules themselves, which dictate the behavior of each cell and 
+how it is influenced by its neighbor. The game of life, for example, either spawns, maintains, or kills a cell depending on the 
+number of neighbors, whereas the forest fire variation causes a cell to “burn” based on its surrounding neighbors and probabilistic values 
+(read from the `.sim` file).
 
 
 ## Discussion Questions
 
  * How does a Cell know what rules to apply for its simulation?
 
+The simulation rules are determined by the `Type` field in the `.sim` file provided. This field will map directly to a controller class that manages the update rules for each cell.
+
  * How does a Cell know about its neighbors?
 
+Each Cell will have a model/controller which will have a data structure that contains information about its neighbors and their status/properties. This model/controller will be independent of the view.
+Or have a model for the entire grid where the world is held in a 2-D int array. Where there is a method that scan around the cell
+
  * How can a Cell update itself without affecting its neighbors update?
+
+Have two copies of the world/board, all updates are done on the new one without affecting the old one.
 
  * What behaviors does the Grid itself have?
 
@@ -27,8 +42,10 @@
 
  * How is configuration information used to set up a simulation?
 
- * How is the GUI updated after all the cells have been updated?
+The configuration information sets up the simulation by operating in two steps. The first step calls all of the cells and their status to calculate what changes are needed. 
+Then the second step iterates through all of the cells marked to be changed and implements their respective changes. The model updates on each step 1.
 
+ * How is the GUI updated after all the cells have been updated?
 
 
 ## Alternate Designs
