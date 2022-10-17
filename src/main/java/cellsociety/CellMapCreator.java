@@ -14,7 +14,7 @@ public class CellMapCreator {
    * that are alive
    * @return
    */
-  public static HashMap<Cell, Integer> CreateMap(List<Cell> cells){
+  protected static HashMap<Cell, Integer> CreateMap(List<Cell> cells){
     HashMap<Cell, Integer> CellMap = new HashMap<>();
     for(Cell newCell : cells){
       CellMap.put(newCell, ALIVE);
