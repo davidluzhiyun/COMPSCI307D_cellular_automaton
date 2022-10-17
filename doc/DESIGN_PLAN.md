@@ -134,9 +134,20 @@ or made from [a tool that generates UML from existing code](http://staruml.io/).
 #### Extension Cases
 
  * What commonalities will be factored out into superclasses?
+
+A superclass will be made for the *Backend Model* functionality, which includes consistent functional elements
+of all CA including setting the state of a grid and checking the neighbors and number of neighbors for a cell
+to be able to apply some kind of change to it. In addition, setting up and resetting the grid are common piecees of 
+required function for each of the CA and simulations.
+
+Another superclass that might be useful is a superclass for *Cells* since the behavior and properties of a Cell might not be
+consistent among all CA (TBD whether this is actually how we decide to do this)
  
  * How will differences be handled when superclasses are extended?
- 
+
+Methods that include setting the game up for instance or check neighbors in a way incompatible or not precisely how
+a simulation requires it can be overridden and reconstructed in individual model classes for each respective CA.
+Superclasses will be constructed as abstract classes to be able to do this and provide abstraction for the entire model functionality.
  
 
 ## Design Considerations
