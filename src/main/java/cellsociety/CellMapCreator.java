@@ -1,12 +1,10 @@
 package cellsociety;
 
+
 import java.util.HashMap;
 import java.util.List;
 
 public class CellMapCreator {
-
-  public static final int DEAD = 0;
-  public static final int ALIVE = 1;
 
   /**
    * Still need to add how we are going to iterate over all the cells in the file that are alive,
@@ -17,7 +15,7 @@ public class CellMapCreator {
   protected static HashMap<Cell, Integer> CreateMap(List<Cell> cells){
     HashMap<Cell, Integer> CellMap = new HashMap<>();
     for(Cell newCell : cells){
-      CellMap.put(newCell, ALIVE);
+      CellMap.put(newCell, Cell.ALIVE);
     }
     return CellMap;
   }
