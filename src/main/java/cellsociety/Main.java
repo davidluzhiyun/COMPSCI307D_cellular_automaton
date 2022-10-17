@@ -26,7 +26,8 @@ public class Main extends Application {
     @Override
     public void start (Stage primaryStage) {
         GUI gui = new GUI();
-        // CellSociety
+        CellSociety cellSociety = new CellSociety();
+
         primaryStage.setScene(gui.setupScene());
         primaryStage.setTitle("Cell Society");
         primaryStage.show();
