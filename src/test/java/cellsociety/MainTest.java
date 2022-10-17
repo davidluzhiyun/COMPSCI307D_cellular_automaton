@@ -22,17 +22,17 @@ class MainTest {
         assertEquals(0.001, m.getVersion(), TOLERANCE);
     }
 
-    @Test
-    void testCSVDataSum () {
-        String csvData = """
-                width,height
-                1,1,1,1,1,1,1,1,1,1
-                1,1,1,1,1,1,1,1,1,1
-                1,1,1,1,1,1,1,1,1,1
-                1,1,1,1,1,1,1,1,1,1
-                """;
-
-        Main m = new Main();
-        assertEquals(40, m.sumCSVData(new StringReader(csvData)));
-    }
+//    @Test
+//    void testCSVDataSum () {
+//        String csvData = """
+//                width,height
+//                1,1,1,1,1,1,1,1,1,1
+//                1,1,1,1,1,1,1,1,1,1
+//                1,1,1,1,1,1,1,1,1,1
+//                1,1,1,1,1,1,1,1,1,1
+//                """;
+//
+//        Main m = new Main();
+//        assertEquals(40, m.sumCSVData(new StringReader(csvData)));
+//    }
 }

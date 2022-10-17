@@ -2,83 +2,67 @@ package cellsociety.gui;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import javafx.application.Application;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ResourceBundle;
 
+/**
+ * This class generates an interactive file explorer for the user to select a data file.
+ */
 public class FileChooser {
+    private static FileChooser instance = null;
+
     public static final String DATA_FILE_CSV_EXTENSION = "*.csv";
     // default to start in the data folder to make it easy on the user to find
     public static final String DATA_FILE_FOLDER = System.getProperty("user.dir") + "/data";
     // NOTE: make ONE chooser since generally accepted behavior is that it remembers where user left it last
     private final static javafx.stage.FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_CSV_EXTENSION);
     // internal configuration file
-    public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
 
-    public FileChooser(){
-
+    private File dataFile;
+    private FileChooser(){
+        //TODO: Implement as singleton? We should only have one instance at a time.
     }
 
+    public static FileChooser getInstance(){
+        if(instance == null){
+            instance = new FileChooser();
+        }
+        return instance;
+    }
+
+    /**
+     * Creates a pop-up file explorer for the user to select their desired data file.
+     */
     public void promptFileChooser(){
-        try {
-            File dataFile = FILE_CHOOSER.showOpenDialog(new Stage());
-            if (dataFile != null) {
-                int sum = sumCSVData(new FileReader(dataFile));
-                showMessage(AlertType.INFORMATION, "" + sum);
-            }
-        }
-        catch (IOException e) {
-            // should never happen since user selected the file
-            showMessage(AlertType.ERROR, "Invalid Data File Given");
-        }
-    }
-
-
-
-
-    /**
-     * Returns sum of values in the given CSV data source (could be anything that is readable).
-     */
-    public int sumCSVData (Reader dataReader) {
-        // this syntax automatically close file resources if an exception occurs
-        try (CSVReader csvReader = new CSVReader(dataReader)) {
-            int total = 0;
-            // get headers separately
-            String[] headers = csvReader.readNext();
-            // read rest of data line by line
-            String[] nextRecord;
-            while ((nextRecord = csvReader.readNext()) != null) {
-                for (String value : nextRecord) {
-                    total += Integer.parseInt(value);
-                }
-            }
-            return total;
-        }
-        catch (IOException | CsvValidationException e) {
-            showMessage(Alert.AlertType.ERROR, "Invalid CSV Data");
-            return 0;
-        }
+        this.dataFile = FILE_CHOOSER.showOpenDialog(new Stage());
+//
+//        try {
+//            this.dataFile = FILE_CHOOSER.showOpenDialog(new Stage());
+//            if (dataFile != null) {
+//                int sum = sumCSVData(new FileReader(dataFile));
+//                showMessage(AlertType.INFORMATION, "" + sum);
+//            }
+//        }
+//        catch (IOException e) {
+//            // should never happen since user selected the file
+//            showMessage(AlertType.ERROR, "Invalid Data File Given");
+//        }
     }
 
     /**
-     * A method to test getting internal resources.
+     * @return the data file the user selected.
      */
-    public double getVersion () {
-        ResourceBundle resources = ResourceBundle.getBundle(INTERNAL_CONFIGURATION);
-        return Double.parseDouble(resources.getString("Version"));
-    }
-
-    // display given message to user using the given type of Alert dialog box
-    private void showMessage (Alert.AlertType type, String message) {
-        new Alert(type, message).showAndWait();
+    public File getDataFile(){
+        if(this.dataFile == null){
+            throw new RuntimeException("Data file not selected!");
+        }
+        return this.dataFile;
     }
 
     // set some sensible defaults when the FileChooser is created

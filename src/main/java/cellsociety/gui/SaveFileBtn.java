@@ -1,6 +1,6 @@
 package cellsociety.gui;
 
-public class FileSaveButton {
+public class SaveFileBtn {
 
 
 }

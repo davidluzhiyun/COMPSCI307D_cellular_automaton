@@ -1,25 +1,16 @@
 package cellsociety;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.util.ResourceBundle;
-
 import cellsociety.gui.GUI;
 import javafx.application.Application;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-
 
 /**
  * Feel free to completely change this code or delete it entirely. 
  */
 public class Main extends Application {
+    public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
+
     /**
      * @see Application#start(Stage)
      */
@@ -31,5 +22,13 @@ public class Main extends Application {
         primaryStage.setScene(gui.setupScene());
         primaryStage.setTitle("Cell Society");
         primaryStage.show();
+    }
+
+    /**
+     * A method to test getting internal resources.
+     */
+    public double getVersion () {
+        ResourceBundle resources = ResourceBundle.getBundle(INTERNAL_CONFIGURATION);
+        return Double.parseDouble(resources.getString("Version"));
     }
 }
