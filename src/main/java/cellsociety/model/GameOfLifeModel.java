@@ -1,5 +1,5 @@
-package cellsociety;
+package cellsociety.model;
 
-public class GameOfLifeModel extends BaseModel {
+public class GameOfLifeModel extends BaseSimProcessor {
 
 }
