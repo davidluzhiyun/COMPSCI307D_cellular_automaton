@@ -3,10 +3,9 @@ package cellsociety.gui;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 
 public class GUI {
-
+    public static final String GUI_ICON_PROPERTIES = "cellsociety.properties.GUIIcons";
     public GUI(){
 
     }
@@ -19,7 +18,7 @@ public class GUI {
         VBox leftPanel = new VBox();
         HBox bottomPanel = new HBox();
 
-        FileLoadButton loadFileButton = new FileLoadButton();
+        LoadFileBtn loadFileButton = new LoadFileBtn();
 
 
         //NOTE: TEMPORARY!!! No magic values!
