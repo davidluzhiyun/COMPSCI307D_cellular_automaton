@@ -1,46 +1,46 @@
 package cellsociety;
 
-import cellsociety.model.Cell;
+import cellsociety.model.CellConstructor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 public class CellTest {
-  private Cell cell;
+  private CellConstructor cellConstructor;
 
   @BeforeEach
   public void setCell() {
-    cell = new Cell(1);
-    cell.setCellX(17);
-    cell.setCellY(32);
+    cellConstructor = new CellConstructor(1);
+    cellConstructor.setCellX(17);
+    cellConstructor.setCellY(32);
   }
 
   @Test
   void testGetState() {
     int real = 1;
-    assertEquals(real, cell.getState());
+    assertEquals(real, cellConstructor.getState());
   }
 
   @Test
   void testGetAndSetX() {
     int real = 27;
-    cell.setCellX(27);
-    assertEquals(real, cell.getCellX());
+    cellConstructor.setCellX(27);
+    assertEquals(real, cellConstructor.getCellX());
   }
 
   @Test
   void testGetAndSetY() {
     int real = 14;
-    cell.setCellX(14);
-    assertEquals(real, cell.getCellX());
+    cellConstructor.setCellX(14);
+    assertEquals(real, cellConstructor.getCellX());
   }
 
   @Test
   void testGetAndSetNotEquals() {
     int real = 12;
-    cell.setCellX(17);
-    assertNotEquals(real, cell.getCellX());
+    cellConstructor.setCellX(17);
+    assertNotEquals(real, cellConstructor.getCellX());
   }
 
 }
