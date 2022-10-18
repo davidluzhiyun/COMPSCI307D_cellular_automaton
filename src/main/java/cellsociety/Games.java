@@ -17,7 +17,7 @@ public class Games {
           int neighborCellX = currentCell.xCoordinate() + row;
           int neighborCellY = currentCell.yCoordinate() + column;
           Cell neighborCell = new Cell(neighborCellX, neighborCellY);
-          if(lifeMap.get(neighborCell) == 1) {
+          if(lifeMap.get(neighborCell) == 1 && neighborCellX != currentCell.xCoordinate() && neighborCellY != currentCell.yCoordinate()) {
             neighborCount += 1;
           }
         }
