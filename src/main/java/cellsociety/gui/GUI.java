@@ -1,8 +1,12 @@
 package cellsociety.gui;
 
+import cellsociety.gui.buttons.SaveFileBtn;
 import cellsociety.gui.grid.GridDisplay;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class GUI {
     // Properties
@@ -10,10 +14,11 @@ public class GUI {
     // Style guides
     private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/ButtonStyle.css";
 
-    private BorderPane guiPane;
-    private AnchorPane gridPane;
+    private BorderPane guiWindow;
+    private AnchorPane gridPanel;
     private VBox leftPanel;
     private HBox bottomPanel;
+    GridDisplay gridDisplay;
 
     private GUIPropertiesLoader props;
 
@@ -24,15 +29,19 @@ public class GUI {
 
     public Scene setupScene(){
         // set up gui panes
-        BorderPane guiWindow = new BorderPane();
-        AnchorPane gridPanel = new AnchorPane();
-        HBox bottomPanel = new HBox();
+        guiWindow = new BorderPane();
+        gridPanel = new AnchorPane();
+        bottomPanel = new HBox();
+        leftPanel = new VBox();
 
-        GridDisplay gridDisplay = new GridDisplay();
+        gridDisplay = new GridDisplay();
 
         guiWindow.getStyleClass().add("large-panes");
         gridPanel.getStyleClass().add("large-panes");
         bottomPanel.getStyleClass().add("large-panes");
+
+        setupLeftPanel();
+
 
         guiWindow.setPrefSize(props.getGUIProperty("guiWidth"),
                             props.getGUIProperty("guiHeight"));
@@ -40,6 +49,7 @@ public class GUI {
         gridPanel.setPrefSize(props.getGUIProperty("gridWidth"),
                             props.getGUIProperty("gridHeight"));
         gridPanel.getChildren().add(gridDisplay.getGrid());
+
 
 
 
@@ -56,18 +66,17 @@ public class GUI {
     }
 
     private void setupLeftPanel(){
-        VBox leftPanel = new VBox();
         leftPanel.getStyleClass().add("large-panes");
         leftPanel.setPrefSize(props.getGUIProperty("leftPanelWidth"),
                 props.getGUIProperty("leftPanelHeight"));
 
         HBox buttonContainer = new HBox();
         LoadFileBtn loadFileButton = new LoadFileBtn();
-        SaveFileBtn saveFileBtn = new SaveFileBtn();
+        SaveFileBtn saveFileBtn = new SaveFileBtn("Save file", "openFileIconPath");
 
-        buttonContainer.getChildren().add(loadFileButton.getBtn());
+        buttonContainer.getChildren().addAll(loadFileButton.getBtn(),
+                                             saveFileBtn.getBtn());
 
-
-        leftPanel.getChildren().add(loadFileButton.getBtn());
+        leftPanel.getChildren().add(buttonContainer);
     }
 }
