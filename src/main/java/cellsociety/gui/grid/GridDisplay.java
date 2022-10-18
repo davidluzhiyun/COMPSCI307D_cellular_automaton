@@ -2,6 +2,9 @@ package cellsociety.gui.grid;
 
 import javafx.scene.layout.GridPane;
 
+/**
+ * @author dm396
+ */
 public class GridDisplay {
     GridPane pane;
     public GridDisplay(){

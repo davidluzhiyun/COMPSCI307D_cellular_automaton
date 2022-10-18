@@ -15,6 +15,8 @@ import javafx.scene.layout.VBox;
 /**
  * This class encapsulates the entire user interface, which includes all buttons
  * used to interact with the program as well as the entire view of the grid.
+ *
+ * @author dm396
  */
 public class GUI {
     // Properties

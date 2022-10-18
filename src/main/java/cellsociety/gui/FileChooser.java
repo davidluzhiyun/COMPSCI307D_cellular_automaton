@@ -13,6 +13,8 @@ import java.io.Reader;
 
 /**
  * This class generates an interactive file explorer for the user to select a data file.
+ *
+ * @author dm396
  */
 public class FileChooser {
     private static FileChooser instance = null;
