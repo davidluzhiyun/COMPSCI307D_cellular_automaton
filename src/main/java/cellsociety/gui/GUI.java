@@ -1,45 +1,73 @@
 package cellsociety.gui;
 
+import cellsociety.gui.grid.GridDisplay;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 
 public class GUI {
+    // Properties
     public static final String GUI_ICON_PROPERTIES = "cellsociety.properties.GUIIcons";
-    public GUI(){
+    // Style guides
+    private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/ButtonStyle.css";
 
+    private BorderPane guiPane;
+    private AnchorPane gridPane;
+    private VBox leftPanel;
+    private HBox bottomPanel;
+
+    private GUIPropertiesLoader props;
+
+    public GUI(){
+        props = new GUIPropertiesLoader();
     }
 
 
     public Scene setupScene(){
         // set up gui panes
-        BorderPane bPane = new BorderPane();
-        AnchorPane gridPane = new AnchorPane();
-        VBox leftPanel = new VBox();
+        BorderPane guiWindow = new BorderPane();
+        AnchorPane gridPanel = new AnchorPane();
         HBox bottomPanel = new HBox();
 
-        LoadFileBtn loadFileButton = new LoadFileBtn();
+        GridDisplay gridDisplay = new GridDisplay();
+
+        guiWindow.getStyleClass().add("large-panes");
+        gridPanel.getStyleClass().add("large-panes");
+        bottomPanel.getStyleClass().add("large-panes");
+
+        guiWindow.setPrefSize(props.getGUIProperty("guiWidth"),
+                            props.getGUIProperty("guiHeight"));
+
+        gridPanel.setPrefSize(props.getGUIProperty("gridWidth"),
+                            props.getGUIProperty("gridHeight"));
+        gridPanel.getChildren().add(gridDisplay.getGrid());
 
 
-        //NOTE: TEMPORARY!!! No magic values!
-        gridPane.setPrefSize(400, 400);
-        gridPane.setBackground(Background.fill(Color.CYAN));
 
-        leftPanel.setPrefSize(150, 550);
-        leftPanel.setBackground(Background.fill(Color.YELLOW));
-        leftPanel.getChildren().add(loadFileButton.getLoadFileBtn());
+        bottomPanel.setPrefSize(props.getGUIProperty("bottomPanelWidth"),
+                                props.getGUIProperty("bottomPanelHeight"));
 
-        bottomPanel.setPrefSize(400, 150);
-        bottomPanel.setBackground(Background.fill(Color.MAGENTA));
+        guiWindow.setCenter(gridPanel);
+        guiWindow.setBottom(bottomPanel);
+        guiWindow.setLeft(leftPanel);
 
-
-
-        bPane.setCenter(gridPane);
-        bPane.setLeft(leftPanel);
-        bPane.setBottom(bottomPanel);
-
-        Scene scene = new Scene(bPane, 750, 750);
-
+        Scene scene = new Scene(guiWindow, 750, 750);
+        scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
         return scene;
+    }
+
+    private void setupLeftPanel(){
+        VBox leftPanel = new VBox();
+        leftPanel.getStyleClass().add("large-panes");
+        leftPanel.setPrefSize(props.getGUIProperty("leftPanelWidth"),
+                props.getGUIProperty("leftPanelHeight"));
+
+        HBox buttonContainer = new HBox();
+        LoadFileBtn loadFileButton = new LoadFileBtn();
+        SaveFileBtn saveFileBtn = new SaveFileBtn();
+
+        buttonContainer.getChildren().add(loadFileButton.getBtn());
+
+
+        leftPanel.getChildren().add(loadFileButton.getBtn());
     }
 }

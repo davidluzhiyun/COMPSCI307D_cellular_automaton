@@ -46,7 +46,7 @@ public class LoadFileBtn {
     }
 
 
-    public Button getLoadFileBtn(){
+    public Button getBtn(){
         return loadFileBtn;
     }
 }
