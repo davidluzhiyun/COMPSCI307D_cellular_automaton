@@ -2,6 +2,9 @@ package cellsociety.gui;
 
 import cellsociety.gui.buttons.LoadFileBtn;
 import cellsociety.gui.buttons.SaveFileBtn;
+import cellsociety.gui.buttons.animation_control.AnimationPlayPauseBtn;
+import cellsociety.gui.buttons.animation_control.AnimationSpeedSelector;
+import cellsociety.gui.buttons.animation_control.AnimationStepForwardButton;
 import cellsociety.gui.grid.GridDisplay;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -52,6 +55,7 @@ public class GUI {
         bottomPanel.getStyleClass().add("large-panes");
 
         setupLeftPanel();
+        setupBottomPanel();
 
         // set panel dimensions
         guiWindow.setPrefSize(props.getGUIProperty("guiWidth"),
@@ -107,5 +111,17 @@ public class GUI {
                                              saveFileBtn.getBtn());
         leftPanel.setSpacing(props.getGUIProperty("leftPanelVertSpacing"));
         leftPanel.getChildren().addAll(buttonContainer, info.getGraphic());
+    }
+
+    private void setupBottomPanel(){
+        HBox buttonContainer = new HBox();
+        AnimationPlayPauseBtn playPauseBtn = new AnimationPlayPauseBtn("Play/Pause", "playpause");
+        AnimationSpeedSelector speedSelector = new AnimationSpeedSelector("Speed", "speed");
+        AnimationStepForwardButton stepForwardButton = new AnimationStepForwardButton("Step", "step");
+
+        buttonContainer.getChildren().addAll(playPauseBtn.getBtn(),
+                                            speedSelector.getBtn(),
+                                            stepForwardButton.getBtn());
+        bottomPanel.getChildren().add(buttonContainer);
     }
 }
