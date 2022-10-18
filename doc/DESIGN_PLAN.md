@@ -28,8 +28,8 @@ since some simulations may have different cell properties and states.
 
 |Cell| |
 |--|---|
-| | |
-| | |
+|int X position and int Y position for record| CellMap|
+|int state (dead or alive) | CellMap|
 | | |
 | | |
 
@@ -37,12 +37,13 @@ CellMap: class to represent an instance of the Grid for the simulation
 
 The purpose of this class is to create the cell grid to be used for the model and create all related methods
 to modify and update cells and add cells to the map of the Grid in the correct manner, including getters and setters
-for cells and cell states.
+for cells and cell states. It adds all the active cells to a Map and makes a set of All of the Cells so that they can be referenced
+and checked and added properly as new living cells if needed
 
 |CellMap| |
 |--|---|
-| | |
-| | |
+|Map CreateMap| BaseSimProcessor & Cell|
+|Set AllCells | BaseSimProcessor|
 | | |
 | | |
 
@@ -67,20 +68,62 @@ necessary methods in the base model to function for the specific simulation or a
 
 |GameOfLifeModel| |
 |--|---|
-| | |
-| | |
-| | |
-| | |
+|checkNeighbors | |
+|checkInBoundsNeighbors | |
+|checkLivingOrDead | |
+|updateCells | |
+|setUpGrid | |
 
 _ALL OTHER MODEL CLASSES WILL BE IMPLEMENTED IN THE SAME WAY AS THE GAME OF LIFE MODEL, WITH SLIGHTLY DIFFERENT
 METHODS TO EFFECTIVELY IMPLEMENT THE RULES OF THE SPECIFIC SIMULATION AND CA_
 
 **View:** The view includes all frontend components, including the grid itself and all of the other buttons and features that 
-it includes
+it includes 
+
+FileChooser: class to implement File Choosing on the GUI screen
+
+The purpose of this class is to use the file chooser in JavaFX to allow users to click in the GUI
+and choose a file on their local computer and then translate this file to the controller which will then pass it
+to the CellMap class to make the living Map of cells
+
+|FileChooser| |
+|--|---|
+|getInstance | Controller.DataFileParser|
+|promptFileChooser | Controller.DataFileParser|
+| | |
+| | |
+| | |
+
+GUI: class to setup the scene of the GUI
+
+The purpose of this class is to setup the GUI screen with all the frontend structure and 
+the buttons and sizing
+
+|GUI| |
+|--|---|
+|setupScene | |
+| | |
+| | |
+| | |
+| | |
+
 
 **Controller:** The controller includes parsing including reading in from the CSV files and translating the information from 
 file selection on the view to the model. It also is responsible for error handling and all the other related relational components between
 the view and model that allow them to be tested and implemented independently (TO BE FINISHED WITH CRC CARDS).
+
+DataFileParser: class to parse the csv file being read in from the GUI and translate it to a format usable by the model
+
+The purpose of this class is to take in the CSV file chosen by the user and then reading it line by line to create the format needed to 
+pass to the backend grid creation methods
+
+|DataFileParser| |
+|--|---|
+| | |
+| | |
+| | |
+| | |
+| | |
 
  * As CRC
 
