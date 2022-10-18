@@ -1,15 +1,11 @@
 package cellsociety.gui.grid;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
-
-import java.nio.file.Paths;
 
 public class GridCell {
 
     Rectangle rectangle;
-    private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/ButtonStyle.css";
+    private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/JFXGraphicStyles.css";
 
 
     public GridCell(int gridDimensions){
