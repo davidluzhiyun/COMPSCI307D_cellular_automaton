@@ -61,6 +61,11 @@ public class GUI {
                             props.getGUIProperty("gridHeight"));
         gridPanel.getChildren().add(gridDisplay.getGrid());
 
+        // FIXME with resources
+        gridDisplay.getGrid().setLayoutX(20);
+        gridDisplay.getGrid().setLayoutY(40);
+
+
         bottomPanel.setPrefSize(props.getGUIProperty("bottomPanelWidth"),
                                 props.getGUIProperty("bottomPanelHeight"));
 
