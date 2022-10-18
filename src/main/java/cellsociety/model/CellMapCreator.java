@@ -1,6 +1,6 @@
-package cellsociety;
+package cellsociety.model;
 
-import java.lang.reflect.Array;
+import cellsociety.model.Cell;
 import java.util.HashMap;
 
 public class CellMapCreator {

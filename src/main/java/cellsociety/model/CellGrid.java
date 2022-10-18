@@ -1,10 +1,11 @@
 package cellsociety.model;
 
-import java.util.HashMap;
+import java.util.List;
 
-public class CellMap extends HashMap {
+public class CellGrid {
   private Cell[][] grid;
-  public CellMap(int height, int width) {
+
+  public CellGrid(int height, int width) {
     grid = new Cell[height][width];
   }
 
