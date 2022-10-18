@@ -15,8 +15,8 @@ public class CellMap {
    */
   protected static HashMap<Cell, Integer> CreateMap(List<Cell> cells, List<Integer> cellStatuses){
     HashMap<Cell, Integer> CellMap = new HashMap<>();
-    for(Cell newCell : cells){
-      CellMap.put(newCell, cellStatuses.indexOf(newCell));
+    for(int i = 0; i < cells.size(); i++){
+      CellMap.put(cells.get(i), cellStatuses.get(i));
     }
     return CellMap;
   }

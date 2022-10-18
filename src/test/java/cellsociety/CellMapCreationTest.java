@@ -1,6 +1,8 @@
 package cellsociety;
 
 import static cellsociety.CellMap.CreateMap;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -135,7 +137,12 @@ public class CellMapCreationTest {
         cellList.add(newCell);
       }
     }
-    HashMap<Cell, Integer> testMap = CreateMap(cellList);
+    ArrayList<Integer> statusList = new ArrayList<>();
+    for(int k = 0; k < 100; k++){
+      statusList.set(k,1);
+    }
+
+    HashMap<Cell, Integer> testMap = CreateMap(cellList, statusList);
     for(Cell c : cellList){
       assertEquals(1, testMap.get(c));
     }
