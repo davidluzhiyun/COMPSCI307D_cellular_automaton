@@ -1,6 +1,6 @@
 package cellsociety;
 
-import static cellsociety.CellMapCreator.CreateMap;
+import static cellsociety.CellMap.CreateMap;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
