@@ -1,0 +1,26 @@
+.button {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 40px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+}
+
+.large-panes {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+
+    -fx-border-color: darkgray;
+    -fx-border-width: 3;
+}
+
+.rectangle {
+    -fx-background-color: #2969c0;
+    -fx-background-radius: 10px;
+
+    -fx-border-radius: 10px;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+}
