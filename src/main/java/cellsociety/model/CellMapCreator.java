@@ -1,6 +1,5 @@
 package cellsociety.model;
 
-import cellsociety.model.Cell;
 import java.util.HashMap;
 
 public class CellMapCreator {
@@ -26,9 +25,9 @@ public class CellMapCreator {
    * @param status
    * @return
    */
-  public static HashMap<Cell, Integer> CreateMap(int rows, int columns, int status){
+  public static HashMap<CellConstructor, Integer> CreateMap(int rows, int columns, int status){
 
-    HashMap<Cell, Integer> CellMap = new HashMap<>();
+    HashMap<CellConstructor, Integer> CellMap = new HashMap<>();
     return CellMap;
   }
 

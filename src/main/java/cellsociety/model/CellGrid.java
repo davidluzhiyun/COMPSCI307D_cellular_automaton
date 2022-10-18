@@ -1,12 +1,10 @@
 package cellsociety.model;
 
-import java.util.List;
-
 public class CellGrid {
-  private Cell[][] grid;
+  private CellConstructor[][] grid;
 
   public CellGrid(int height, int width) {
-    grid = new Cell[height][width];
+    grid = new CellConstructor[height][width];
   }
 
 }

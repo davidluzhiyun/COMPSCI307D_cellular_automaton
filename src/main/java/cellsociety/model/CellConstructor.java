@@ -1,6 +1,6 @@
 package cellsociety.model;
 
-public class Cell {
+public class CellConstructor {
 
   private int cellX;
   private int cellY;
@@ -11,7 +11,7 @@ public class Cell {
    *
    * @param state the state int value, alive or dead (or whatever states the simulation has)
    */
-  public Cell(int state) {
+  public CellConstructor(int state) {
     cellState = state;
   }
 
