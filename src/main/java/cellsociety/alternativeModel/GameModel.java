@@ -18,15 +18,16 @@ public class GameModel {
 
 
   // size of the grid
-  private int sizeX;
-  private int sizeY;
+  // represents the largest index, reachable
+  private int maxX;
+  private int maxY;
 
   //Assume null represents this cell
   private Cell nullHandler;
   // constructor copies a Map and set the size.
   // create a new empty map if receives null
   // ensures size >= 0
-  public GameModel(Map<Coordinate,Cell> grid, int sizeX, int sizeY, Cell nullHandler){
+  public GameModel(Map<Coordinate,Cell> grid, int maxX, int maxY, Cell nullHandler){
     try {
       if (grid == null){
         this.grid = new HashMap<Coordinate,Cell>();
@@ -34,18 +35,18 @@ public class GameModel {
       else {
         this.grid = new HashMap<Coordinate,Cell>(grid);
       }
-      this.sizeX = sizeX;
-      this.sizeY = sizeY;
+      this.maxX = maxX;
+      this.maxY = maxY;
       this.nullHandler = nullHandler;
-      assert sizeX >= 0 && sizeY >= 0;
+      assert maxX >= 0 && maxY >= 0;
     }
     catch (AssertionError e){
-      this.sizeX = Math.max(sizeX,0);
-      this.sizeY = Math.max(sizeX,0);
+      this.maxX = Math.max(maxX,0);
+      this.maxY = Math.max(maxX,0);
     }
   }
-  public GameModel(Map<Coordinate,Cell> grid, int sizeX, int sizeY){
-    this(grid,sizeX,sizeY,null);
+  public GameModel(Map<Coordinate,Cell> grid, int maxX, int maxY){
+    this(grid, maxX, maxY,null);
   }
 
   // package friendly method that gets the neighbours of a cell
@@ -53,8 +54,8 @@ public class GameModel {
   Map<Coordinate,Integer> getNeighbours(int X, int Y){
     try {
       Map<Coordinate,Integer> result = new HashMap<Coordinate,Integer>();
-      for (int i = Math.max(0, X-1); i <= Math.min(X + 1,sizeX); i++) {
-        for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1,sizeY); j++){
+      for (int i = Math.max(0, X-1); i <= Math.min(X + 1, maxX); i++) {
+        for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1, maxY); j++){
           Coordinate coordinate= new Coordinate(i,j);
           Cell selected = grid.get(coordinate);
           if (selected == null){
@@ -65,6 +66,7 @@ public class GameModel {
           }
         }
       }
+      result.remove(new Coordinate(X,Y));
       return result;
     }
     catch (NullPointerException e){
@@ -77,8 +79,8 @@ public class GameModel {
   public void step(){
     try {
       Map<Coordinate,Cell> myFuture = new HashMap<>();
-      for (int i = 0; i < sizeX; i++) {
-        for (int j = 0; i < sizeY; j ++){
+      for (int i = 0; i <= maxX; i++) {
+        for (int j = 0; j <= maxY; j ++){
           Coordinate coordinate= new Coordinate(i,j);
           Cell selected = grid.get(coordinate);
           if (selected == null){
@@ -101,11 +103,11 @@ public class GameModel {
     return new HashMap<Coordinate,Cell>(grid);
   }
 
-  public int getSizeX() {
-    return sizeX;
+  public int getMaxX() {
+    return maxX;
   }
 
-  public int getSizeY() {
-    return sizeY;
+  public int getMaxY() {
+    return maxY;
   }
 }

@@ -6,6 +6,4 @@ package cellsociety.alternativeModel;
  * @param x
  * @param y
  */
-public record Coordinate(int x, int y) {
-
-}
+public record Coordinate(int x, int y) {}
