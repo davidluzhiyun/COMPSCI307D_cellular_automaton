@@ -1,7 +1,7 @@
-package cellsociety.alternativemodel;
+package cellsociety.alternativeModel;
 
 
-import cellsociety.alternativemodel.cell.Cell;
+import cellsociety.alternativeModel.cell.Cell;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
@@ -72,6 +72,8 @@ public class GameModel {
       throw e;
     }
   }
+
+  //Updates the grid
   public void step(){
     try {
       Map<Coordinate,Cell> myFuture = new HashMap<>();

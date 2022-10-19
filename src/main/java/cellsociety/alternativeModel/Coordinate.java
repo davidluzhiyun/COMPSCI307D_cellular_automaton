@@ -1,4 +1,4 @@
-package cellsociety.alternativemodel;
+package cellsociety.alternativeModel;
 
 /**
  * Record class for the coordinate system for cells

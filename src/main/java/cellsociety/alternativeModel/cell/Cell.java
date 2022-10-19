@@ -1,6 +1,6 @@
-package cellsociety.alternativemodel.cell;
+package cellsociety.alternativeModel.cell;
 
-import cellsociety.alternativemodel.Coordinate;
+import cellsociety.alternativeModel.Coordinate;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +9,8 @@ import java.util.Map;
  * @author david_luzhiyun
  */
 public abstract class Cell {
+  // Integer type is for easy processing of the cell
+  // Different types of cell in different games might share the same type integer
   protected int type;
   public Cell(){}
   // Count the number of a certain type of neighbours
