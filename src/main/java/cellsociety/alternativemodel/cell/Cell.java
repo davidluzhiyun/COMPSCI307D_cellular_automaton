@@ -1,5 +1,6 @@
-package cellsociety.alternativemodel;
+package cellsociety.alternativemodel.cell;
 
+import cellsociety.alternativemodel.Coordinate;
 import java.util.HashMap;
 import java.util.Map;
 
