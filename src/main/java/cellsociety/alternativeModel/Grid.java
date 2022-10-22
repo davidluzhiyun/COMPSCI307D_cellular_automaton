@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * Wrapper around Hashmap, facilitate communication between parser
  * and model, and model to GUI
+ * @author david_luzhiyun
  */
 public class Grid {
   // Class variables
@@ -35,6 +36,7 @@ public class Grid {
   }
 
   // Gets the cell at given coordinate
+  // return null if nullHandler is null and try to get a coordinate corresponding to null
   public Cell getCellAt(int X, int Y) throws AssertionError{
     try {
       assert X <= maxX && X >= 0;
@@ -71,6 +73,8 @@ public class Grid {
     }
 
   }
+
+  // Put a cell at given position
   public void putCellAt(int X, int Y, Cell newCell){
     try {
       assert X <= maxX && X >= 0;
@@ -80,7 +84,13 @@ public class Grid {
     catch (AssertionError e){
       // Do nothing
     }
-
   }
 
+  public int getMaxX() {
+    return maxX;
+  }
+
+  public int getMaxY() {
+    return maxY;
+  }
 }
