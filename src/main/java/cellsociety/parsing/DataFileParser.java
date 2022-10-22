@@ -1,7 +1,11 @@
 package cellsociety.parsing;
 
+import cellsociety.alternativeModel.Grid;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
+import java.io.FileReader;
+import java.util.List;
 import javafx.scene.control.Alert;
 
 import java.io.File;
@@ -10,9 +14,44 @@ import java.io.Reader;
 
 public class DataFileParser {
     private File dataFile;
+    private int rows;
+    private int columns;
 
     public DataFileParser(File dataFile){
         this.dataFile = dataFile;
+    }
+
+//Code for reading the CSV file from:
+// https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
+// Java code to illustrate reading a file all data at once
+    public static List<String[]> readAllDataAtOnce(String file) {
+        List<String[]> allData = null;
+        try {
+            // Create an object of file reader
+            // class with CSV file as a parameter.
+            FileReader filereader = new FileReader(file);
+
+            // create csvReader object
+            CSVReader csvReader = new CSVReaderBuilder(filereader).build();
+            allData = csvReader.readAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allData;
+    }
+    private Grid gameOfLifeParser(String gameOfLifeFile){
+        List<String[]> gridValues = readAllDataAtOnce(gameOfLifeFile);
+        //new grid
+        if(gridValues == null){
+
+        }
+        rows = Integer.parseInt(gridValues.get(0)[0]);
+        columns = Integer.parseInt(gridValues.get(0)[1]);
+        for(int r = 1; r < rows + 1; r++){
+            for(int c = 0; c < columns; c++){
+                Integer.parseInt(gridValues.get(r)[c]);
+            }
+        }
     }
 
     // NOTE: the following methods were provided by the professor for us to use

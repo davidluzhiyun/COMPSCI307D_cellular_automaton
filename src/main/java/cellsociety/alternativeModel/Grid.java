@@ -1,6 +1,7 @@
 package cellsociety.alternativeModel;
 
 import cellsociety.alternativeModel.cell.Cell;
+import cellsociety.alternativeModel.cell.CellType;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class Grid {
     }
   }
   // Gets the cell's type tag (an integer representing its type in a game) at given coordinate
-  public int getTypeTagAt(int X, int Y) throws AssertionError{
+  public CellType getTypeTagAt(int X, int Y) throws AssertionError{
     try {
       assert X <= maxX && X >= 0;
       assert Y <= maxY && Y >= 0;
