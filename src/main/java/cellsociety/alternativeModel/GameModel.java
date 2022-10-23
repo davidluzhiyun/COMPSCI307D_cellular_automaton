@@ -2,6 +2,7 @@ package cellsociety.alternativeModel;
 
 
 import cellsociety.alternativeModel.cell.Cell;
+import cellsociety.alternativeModel.cell.CellType;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
@@ -51,9 +52,9 @@ public class GameModel {
 
   // package friendly method that gets the neighbours of a cell
   // make it private if no test is written
-  Map<Coordinate,Integer> getNeighbours(int X, int Y){
+  Map<Coordinate, CellType> getNeighbours(int X, int Y){
     try {
-      Map<Coordinate,Integer> result = new HashMap<Coordinate,Integer>();
+      Map<Coordinate,CellType> result = new HashMap<Coordinate,CellType>();
       for (int i = Math.max(0, X-1); i <= Math.min(X + 1, maxX); i++) {
         for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1, maxY); j++){
           Coordinate coordinate= new Coordinate(i,j);

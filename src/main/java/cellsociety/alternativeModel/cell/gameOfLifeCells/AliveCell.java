@@ -2,6 +2,7 @@ package cellsociety.alternativeModel.cell.gameOfLifeCells;
 
 import cellsociety.alternativeModel.Coordinate;
 import cellsociety.alternativeModel.cell.Cell;
+import cellsociety.alternativeModel.cell.CellType;
 import java.util.Map;
 
 /**
@@ -13,11 +14,11 @@ public class AliveCell extends Cell {
 
   public AliveCell(){
     super();
-    type = 1;
+    type = CellType.ALIVE;
   }
   @Override
-  public Cell update(Map<Coordinate, Integer> neighbours) {
-    int livingNeighbours = countNeighbour(1,neighbours);
+  public Cell update(Map<Coordinate, CellType> neighbours) {
+    int livingNeighbours = countNeighbour(CellType.ALIVE,neighbours);
     if (livingNeighbours == 2){
       return new AliveCell();
     }
