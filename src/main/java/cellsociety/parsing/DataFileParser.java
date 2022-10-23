@@ -1,6 +1,9 @@
 package cellsociety.parsing;
 
+import cellsociety.alternativeModel.cell.Cell;
 import cellsociety.alternativeModel.Grid;
+import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
+import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -43,15 +46,25 @@ public class DataFileParser {
         List<String[]> gridValues = readAllDataAtOnce(gameOfLifeFile);
         //new grid
         if(gridValues == null){
-
+            
         }
+        //Add map of enum values
         rows = Integer.parseInt(gridValues.get(0)[0]);
         columns = Integer.parseInt(gridValues.get(0)[1]);
+        DeadCell gridDefault = new DeadCell();
+        Grid cellGrid = new Grid(rows, columns, gridDefault);
         for(int r = 1; r < rows + 1; r++){
             for(int c = 0; c < columns; c++){
-                Integer.parseInt(gridValues.get(r)[c]);
+                int newCellType = Integer.parseInt(gridValues.get(r)[c]);
+                if(newCellType == 0){
+                    cellGrid.putCellAt(r-1, c, new DeadCell());
+                }
+                else if(newCellType == 1){
+                    cellGrid.putCellAt(r-1, c, new AliveCell());
+                }
             }
         }
+        return cellGrid;
     }
 
     // NOTE: the following methods were provided by the professor for us to use
