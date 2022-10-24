@@ -1,40 +1,37 @@
 package cellsociety.alternativeModel;
 
 
-import cellsociety.alternativeModel.cell.Cell;
+import cellsociety.alternativeModel.cell.StationaryCell;
 import cellsociety.alternativeModel.cell.CellType;
 import java.util.HashMap;
 import java.util.Map;
 import java.lang.Math;
 
 /**
- * This class holds two maps, one signify the current grid and
- * the updated form of the grid.
- * It is responsible for calling cells to update, knowing the position and neighbours of cells
+ * Applicable to Game of Life, Rock Paper Scissors, Spread of fire and other
+ * CAs that doesn't involve cells moving around.
  * @author david_luzhiyun
  */
-public class GameModel {
+public class StationaryGameModel {
   //class variables
-  private Map<Coordinate, Cell> grid;
+  private Map<Coordinate, StationaryCell> grid;
 
 
   // size of the grid
-  // represents the largest index, reachable
+  // represents the largest index reachable
   private int maxX;
   private int maxY;
 
-  //Assume null represents this cell
-  private Cell nullHandler;
   // constructor copies a Map and set the size.
   // create a new empty map if receives null
   // ensures size >= 0
-  public GameModel(Map<Coordinate,Cell> grid, int maxX, int maxY, Cell nullHandler){
+  public StationaryGameModel(Grid inputGrid){
     try {
       if (grid == null){
-        this.grid = new HashMap<Coordinate,Cell>();
+        this.grid = new HashMap<Coordinate, StationaryCell>();
       }
       else {
-        this.grid = new HashMap<Coordinate,Cell>(grid);
+        this.grid = new HashMap<Coordinate, StationaryCell>(grid);
       }
       this.maxX = maxX;
       this.maxY = maxY;
@@ -46,7 +43,7 @@ public class GameModel {
       this.maxY = Math.max(maxX,0);
     }
   }
-  public GameModel(Map<Coordinate,Cell> grid, int maxX, int maxY){
+  public StationaryGameModel(Map<Coordinate, StationaryCell> grid, int maxX, int maxY){
     this(grid, maxX, maxY,null);
   }
 
@@ -58,7 +55,7 @@ public class GameModel {
       for (int i = Math.max(0, X-1); i <= Math.min(X + 1, maxX); i++) {
         for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1, maxY); j++){
           Coordinate coordinate= new Coordinate(i,j);
-          Cell selected = grid.get(coordinate);
+          StationaryCell selected = grid.get(coordinate);
           if (selected == null){
             result.put(coordinate,nullHandler.getType());
           }
@@ -79,18 +76,18 @@ public class GameModel {
   //Updates the grid
   public void step(){
     try {
-      Map<Coordinate,Cell> myFuture = new HashMap<>();
+      Map<Coordinate, StationaryCell> myFuture = new HashMap<>();
       for (int i = 0; i <= maxX; i++) {
         for (int j = 0; j <= maxY; j ++){
           Coordinate coordinate= new Coordinate(i,j);
-          Cell selected = grid.get(coordinate);
+          StationaryCell selected = grid.get(coordinate);
           if (selected == null){
             selected = nullHandler;
           }
           myFuture.put(coordinate, selected.update(getNeighbours(i,j)));
         }
       }
-      grid = new HashMap<Coordinate, Cell>(myFuture);
+      grid = new HashMap<Coordinate, StationaryCell>(myFuture);
     }
     catch (NullPointerException e){
       System.out.println("Please initialize the nullHandler for GameModel as a cell if you wish to include null in the map");
@@ -100,8 +97,8 @@ public class GameModel {
 
   // Return a clone of myCurrent for looking
   // Change if you want to use other data structures
-  public Map<Coordinate,Cell> lookCurrentGrid(){
-    return new HashMap<Coordinate,Cell>(grid);
+  public Map<Coordinate, StationaryCell> lookCurrentGrid(){
+    return new HashMap<Coordinate, StationaryCell>(grid);
   }
 
   public int getMaxX() {
