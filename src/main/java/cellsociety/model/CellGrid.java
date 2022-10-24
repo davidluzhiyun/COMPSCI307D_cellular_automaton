@@ -1,13 +1,12 @@
 package cellsociety.model;
 
-import cellsociety.alternativeModel.Coordinate;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
 import java.util.List;
 
 public class CellGrid implements GridInterface {
-  private Map<Coordinate, Cell> gameGrid;
+  private List[][] gameGrid;
 
   /**
    * Constructor for cellGrid
@@ -15,7 +14,7 @@ public class CellGrid implements GridInterface {
    * @param width
    */
   public CellGrid(int height, int width) {
-    gameGrid = new Map<>();
+    gameGrid = new List[height][width];
   }
 
   /**
@@ -36,9 +35,9 @@ public class CellGrid implements GridInterface {
   }
 
   private void makeGrid(List[][] inputGrid) {
-    int row
   }
 
+  /*
   private Grid gameOfLifeParser(String gameOfLifeFile){
     List<String[]> gridValues = readAllDataAtOnce(gameOfLifeFile);
     //new grid
@@ -63,5 +62,6 @@ public class CellGrid implements GridInterface {
     }
     return cellGrid;
   }
+   */
 
 }

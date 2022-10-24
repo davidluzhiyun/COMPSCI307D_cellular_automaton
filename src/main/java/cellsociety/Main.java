@@ -1,6 +1,7 @@
 package cellsociety;
 
 import cellsociety.controller.CellSociety;
+import cellsociety.gui.SplashScreen;
 import java.util.ResourceBundle;
 import cellsociety.gui.GUI;
 import javafx.application.Application;
@@ -17,12 +18,24 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage primaryStage) {
+        SplashScreen startupScreen = new SplashScreen();
+        primaryStage.setTitle(startupScreen.SPLASH_TITLE);
+        primaryStage.setScene(startupScreen.createScene());
+        primaryStage.show();
+
+        /* Creating a splash instead that we can use through the controller to dynamically
+        Change how the GUI works and the about sections of it depending on game choice
+        */
+
+        /*
         GUI gui = new GUI();
         CellSociety cellSociety = new CellSociety();
 
         primaryStage.setScene(gui.setupScene());
         primaryStage.setTitle("Cell Society");
         primaryStage.show();
+    }
+         */
     }
 
     /**

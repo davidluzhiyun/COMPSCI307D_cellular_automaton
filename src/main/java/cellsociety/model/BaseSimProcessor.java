@@ -5,5 +5,5 @@ public abstract class BaseSimProcessor {
   private CellGrid initialGameStates;
   private CellGrid currentGameStates;
 
-  public GridInterface initialGridStateCreator()
+
 }
