@@ -1,4 +1,4 @@
-package cellsociety.parsing;
+package cellsociety.controller;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;

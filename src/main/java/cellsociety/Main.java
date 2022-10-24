@@ -1,6 +1,6 @@
 package cellsociety;
 
-import java.sql.SQLOutput;
+import cellsociety.controller.CellSociety;
 import java.util.ResourceBundle;
 import cellsociety.gui.GUI;
 import javafx.application.Application;
