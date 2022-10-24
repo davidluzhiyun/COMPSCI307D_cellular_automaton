@@ -18,7 +18,9 @@ import javafx.scene.text.TextAlignment;
  * Adapted from Logo splash screen right now, have to connect action events to controller methods
  * Use reflection to do this from resource files
  *
+ *
  * @author armanshekarriz
+ * @author Nicki Lee (adapted from structure in Oolala)
  */
 
 public class SplashScreen {
@@ -38,6 +40,7 @@ public class SplashScreen {
   /**
    * Make the splash screen startup
    *
+   * @return Splash Screen Scene
    */
   public Scene createScene() {
     VBox v = new VBox(10);
@@ -73,6 +76,14 @@ public class SplashScreen {
     return SPLASH_SCENE;
   }
 
+  /**
+   * Set text on the splash screen
+   *
+   * @param text
+   * @param fontSize
+   * @param color
+   * @return
+   */
   public Text setSplashText(String text, int fontSize, Color color) {
     Text t = new Text(text);
     t.setFont(Font.font("Futura", fontSize));
@@ -81,6 +92,11 @@ public class SplashScreen {
     return t;
   }
 
+  /**
+   * Make buttons that provide language options
+   *
+   * @return language button options
+   */
   public HBox makeLanguageButtons() {
     HBox languageButtons = new HBox(5);
     languageButtons.setAlignment(Pos.CENTER);
@@ -106,6 +122,11 @@ public class SplashScreen {
     return languageButtons;
   }
 
+  /**
+   * Make the buttons that allow users to select from all the Cellular Automata before loading GUI
+   *
+   * @return Application Buttons
+   */
   public HBox makeAppButtons() {
     HBox appButtons = new HBox(5);
     appButtons.setAlignment(Pos.CENTER);
@@ -143,8 +164,11 @@ public class SplashScreen {
     return appButtons;
   }
 
-
-
+  /**
+   * Make buttons for style and UI design choices, based on CSS styling
+   *
+   * @return CSS style choice buttons
+   */
   public HBox makeStyleOptions() {
     HBox styleButtons = new HBox(5);
     styleButtons.setAlignment(Pos.CENTER);
