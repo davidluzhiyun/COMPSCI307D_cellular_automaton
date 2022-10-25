@@ -1,7 +1,5 @@
 package cellsociety.controller;
 
-
-public class GameInfoParser {
-
+public class ErrorChecker {
 
 }

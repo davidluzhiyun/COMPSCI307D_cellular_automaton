@@ -13,8 +13,6 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
 
-
-
     /**
      * @see Application#start(Stage)
      */
@@ -49,5 +47,7 @@ public class Main extends Application {
         return Double.parseDouble(resources.getString("Version"));
     }
 
-
+    public void startGUI() {
+        
+    }
 }

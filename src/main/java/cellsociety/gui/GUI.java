@@ -126,4 +126,5 @@ public class GUI {
                                             stepForwardButton.getBtn());
         bottomPanel.getChildren().add(buttonContainer);
     }
+
 }

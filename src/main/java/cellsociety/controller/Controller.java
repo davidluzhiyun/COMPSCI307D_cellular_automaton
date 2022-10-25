@@ -1,36 +1,45 @@
 package cellsociety.controller;
 
-import cellsociety.gui.GUI;
-import cellsociety.gui.GUIPropertiesLoader;
-import cellsociety.gui.SimInformationDisplay;
+import cellsociety.alternativeModel.AbstractGameModel;
+import cellsociety.alternativeModel.Grid;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 public class Controller {
 
-  private GUI simGUI;
-  private GUIPropertiesLoader GUIprops;
-  private SimInformationDisplay simInfo;
-
+  private Properties simProperties;
+  private AbstractGameModel simGameModel;
+  private SimInfoParser simGameInfoParser;
+  private CSVInitialGridParser simStateParser;
+  private Grid initialGrid;
+  private ErrorChecker errorChecker;
+  private ResourceBundle errorMessages;
+  private static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.ControllerResources.Errors";
 
   /**
-   * Constructor for Frontend Action Controller, needs
-   * to be able to make the view based on the game, and therefore have instances
-   * of necessary GUI classes
+   * Constructor for Controller, needs
+   * to be able to perform all necessary actions, and therefore have the model
+   * and the view here to perform actions from
    */
-  public Controller(GUI gui) {
-    simGUI = gui;
+  public Controller() {
+    simGameInfoParser = new SimInfoParser();
+    simProperties = new Properties();
+
+    errorChecker = new ErrorChecker();
+    errorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
   }
 
   /**
    * Setup the game chosen in the splash screen by the user
    */
-  public void setupGameChosen(String s) {
-
+  public void setupGameChosen(String cellularAutomataType) {
+    simProperties.setProperty("Type", cellularAutomataType);
   }
 
   /**
    * Set the language choice chosen by the user
    */
-  public void setLanguageChoice() {
+  public void setLanguageChoice(String languageChoice) {
 
   }
 
@@ -51,5 +60,9 @@ public class Controller {
   /**
    * Communiate
    */
+
+  public void startGUIfromSplash() {
+
+  }
 
 }

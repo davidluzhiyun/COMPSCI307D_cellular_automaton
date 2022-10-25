@@ -1,9 +1,11 @@
 package cellsociety.model;
 
+import java.util.List;
+
 public abstract class BaseSimProcessor {
 
-  private CellGrid initialGameStates;
-  private CellGrid currentGameStates;
+  private List[][] initialGameStates;
+  private List[][] currentGameStates;
 
 
 }
