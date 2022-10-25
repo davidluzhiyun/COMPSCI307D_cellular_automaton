@@ -1,8 +1,7 @@
 package cellsociety;
 
-import java.sql.SQLOutput;
 import java.util.ResourceBundle;
-import cellsociety.gui.GUI;
+import cellsociety.view.GUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

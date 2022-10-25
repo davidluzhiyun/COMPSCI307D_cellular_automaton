@@ -1,4 +1,4 @@
-package cellsociety.gui;
+package cellsociety.view;
 
 import javafx.scene.text.Text;
 

@@ -1,4 +1,4 @@
-package cellsociety.gui.grid;
+package cellsociety.view.grid;
 
 public class CellColorPicker {
 }
