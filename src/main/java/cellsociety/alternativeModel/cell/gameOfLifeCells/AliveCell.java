@@ -14,7 +14,7 @@ public class AliveCell extends StationaryCell {
 
   public AliveCell(){
     super();
-    type = CellType.ALIVE;
+    setType(CellType.ALIVE);
   }
 
   @Override

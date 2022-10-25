@@ -11,7 +11,7 @@ import java.util.Map;
  * Does most of the error handling for model by regulating the input
  * @author david_luzhiyun
  */
-public class Grid {
+public class Grid implements ImmutableTypeGrid{
   // Class variables
   private int maxX;
   private int maxY;
@@ -39,7 +39,7 @@ public class Grid {
 
 
   // Gets the cell at given coordinate
-  // return null if nullHandler is null and try to get a coordinate corresponding to null
+  // Throws assertion error if nullHandler is null and try to get a coordinate corresponding to null
   public AbstractCell getCellAt(int X, int Y) throws AssertionError{
     try {
       assert X <= maxX && X >= 0;
@@ -66,14 +66,18 @@ public class Grid {
       throw e;
     }
   }
+
+
   // Gets the cell's type at given coordinate
+  // Error handling done by getCellAt
+  @Override
   public CellType getTypeTagAt(int X, int Y) throws AssertionError, NullPointerException{
     try {
       AbstractCell myCell = this.getCellAt(X, Y);
       return myCell.getType();
     }
     catch (AssertionError e){
-      System.out.println("Tried to get a cell's type tag out of bound for Grid");
+      System.out.println("Error when getTypeTagAt tries to call getCellAt");
       throw e;
     }
   }

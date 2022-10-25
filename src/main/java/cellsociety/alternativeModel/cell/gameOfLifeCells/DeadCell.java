@@ -9,7 +9,7 @@ import java.util.Map;
 public class DeadCell extends StationaryCell {
   public DeadCell(){
     super();
-    type = CellType.DEAD;
+    setType(CellType.DEAD);
   }
 
   @Override

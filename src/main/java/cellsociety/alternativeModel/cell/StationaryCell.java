@@ -9,8 +9,6 @@ import java.util.Map;
  * @author david_luzhiyun
  */
 public abstract class StationaryCell extends AbstractCell{
-  // Integer type is for easy processing of the cell
-  protected CellType type;
   public StationaryCell(){}
   // Count the number of a certain type of neighbours
   // return 0 when "neighbours" is null
