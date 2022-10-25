@@ -8,7 +8,7 @@ public class GridCell {
     private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/JFXGraphicStyles.css";
 
 
-    public GridCell(int gridDimensions){
+    public GridCell(int squareSize){
         rectangle = new Rectangle(50, 50);
         rectangle.getStyleClass().add("rectangle");
     }

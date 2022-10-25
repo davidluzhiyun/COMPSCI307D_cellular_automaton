@@ -1,5 +1,6 @@
 package cellsociety.gui.grid;
 
+import cellsociety.gui.GUI;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -7,11 +8,10 @@ import javafx.scene.layout.GridPane;
  */
 public class GridDisplay {
     GridPane pane;
-    public GridDisplay(){
-        //FIXME: Use resources!!!
+    public GridDisplay(int width, int height){
         pane = new GridPane();
-        pane.setHgap(3);
-        pane.setVgap(3);
+        pane.setHgap(GUI.properties.getGUIProperty("gridCellHGap"));
+        pane.setVgap(GUI.properties.getGUIProperty("gridCellVGap"));
         this.populateGrid();
     }
 

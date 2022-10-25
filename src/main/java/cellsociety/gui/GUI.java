@@ -6,11 +6,10 @@ import cellsociety.gui.buttons.animation_control.AnimationPlayPauseBtn;
 import cellsociety.gui.buttons.animation_control.AnimationSpeedSelector;
 import cellsociety.gui.buttons.animation_control.AnimationStepForwardButton;
 import cellsociety.gui.grid.GridDisplay;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.*;
 
 /**
  * This class encapsulates the entire user interface, which includes all buttons
@@ -26,15 +25,14 @@ public class GUI {
 
     // Set of panels that organizes GUI elements
     private BorderPane guiWindow;
-    private AnchorPane gridPanel;
+    private StackPane gridPanel;
     private VBox leftPanel;
     private HBox bottomPanel;
     GridDisplay gridDisplay;
 
-    private GUIPropertiesLoader props;
+    public static final GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
     public GUI(){
-        props = new GUIPropertiesLoader();
     }
 
 
@@ -45,11 +43,16 @@ public class GUI {
     public Scene setupScene(){
         // set up gui panes
         guiWindow = new BorderPane();
-        gridPanel = new AnchorPane();
+        gridPanel = new StackPane();
         bottomPanel = new HBox();
         leftPanel = new VBox();
 
-        gridDisplay = new GridDisplay();
+        // FIXME: use game options
+        gridDisplay = new GridDisplay(50, 50);
+        // FIXME with resources
+        gridDisplay.getGrid().setAlignment(Pos.CENTER);
+//        gridDisplay.getGrid().setLayoutX(20);
+//        gridDisplay.getGrid().setLayoutY(40);
 
         // style the panels
         guiWindow.getStyleClass().add("large-panes");
@@ -60,20 +63,16 @@ public class GUI {
         setupBottomPanel();
 
         // set panel dimensions
-        guiWindow.setPrefSize(props.getGUIProperty("guiWidth"),
-                            props.getGUIProperty("guiHeight"));
+        guiWindow.setPrefSize(properties.getGUIProperty("guiWidth"),
+                            properties.getGUIProperty("guiHeight"));
 
-        gridPanel.setPrefSize(props.getGUIProperty("gridWidth"),
-                            props.getGUIProperty("gridHeight"));
+        gridPanel.setPrefSize(properties.getGUIProperty("gridWidth"),
+                            properties.getGUIProperty("gridHeight"));
         gridPanel.getChildren().add(gridDisplay.getGrid());
+        gridPanel.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 
-        // FIXME with resources
-        gridDisplay.getGrid().setLayoutX(20);
-        gridDisplay.getGrid().setLayoutY(40);
-
-
-        bottomPanel.setPrefSize(props.getGUIProperty("bottomPanelWidth"),
-                                props.getGUIProperty("bottomPanelHeight"));
+        bottomPanel.setPrefSize(properties.getGUIProperty("bottomPanelWidth"),
+                                properties.getGUIProperty("bottomPanelHeight"));
 
         // sets panel positions within the larger GUI window
         guiWindow.setCenter(gridPanel);
@@ -81,7 +80,8 @@ public class GUI {
         guiWindow.setLeft(leftPanel);
 
         // set up scene
-        Scene scene = new Scene(guiWindow, 750, 750);
+        Scene scene = new Scene(guiWindow, properties.getGUIProperty("guiWidth"),
+                                            properties.getGUIProperty("guiHeight"));
         scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
         return scene;
     }
@@ -93,8 +93,8 @@ public class GUI {
     private void setupLeftPanel(){
         // set up left panel's properties
         leftPanel.getStyleClass().add("large-panes");
-        leftPanel.setPrefSize(props.getGUIProperty("leftPanelWidth"),
-                props.getGUIProperty("leftPanelHeight"));
+        leftPanel.setPrefSize(properties.getGUIProperty("leftPanelWidth"),
+                properties.getGUIProperty("leftPanelHeight"));
 
         // organizes buttons in a horizontal container
         HBox buttonContainer = new HBox();
@@ -111,7 +111,7 @@ public class GUI {
         // add all elements to panel group
         buttonContainer.getChildren().addAll(loadFileButton.getBtn(),
                                              saveFileBtn.getBtn());
-        leftPanel.setSpacing(props.getGUIProperty("leftPanelVertSpacing"));
+        leftPanel.setSpacing(properties.getGUIProperty("leftPanelVertSpacing"));
         leftPanel.getChildren().addAll(buttonContainer, info.getGraphic());
     }
 
@@ -126,4 +126,5 @@ public class GUI {
                                             stepForwardButton.getBtn());
         bottomPanel.getChildren().add(buttonContainer);
     }
+
 }
