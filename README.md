@@ -3,26 +3,32 @@ Cell Society
 
 This project implements a cellular automata simulator.
 
-Names:
+Names: Diego, Arman, Ian, David
 
 
 ### Timeline
 
-Start Date: 
+Start Date: 10/12/22
 
-Finish Date: 
+Finish Date: TBD
 
-Hours Spent:
+Hours Spent: TBD
 
 ### Primary Roles
 
+Diego: Frontend 
+
+Arman: Frontend and Controller/Parsing
+
+Ian: Parsing and Backend Model Design
+
+David: Backend and Model Design
 
 ### Resources Used
 
 Collaborators:
 
 Attributions for others' work:
-
 
 ### Running the Program
 

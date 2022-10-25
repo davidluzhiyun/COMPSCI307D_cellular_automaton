@@ -1,5 +1,6 @@
 package cellsociety.gui;
 
+import cellsociety.Main;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -28,7 +29,6 @@ public class SplashScreen {
   protected Group SPlASH_SCREEN_ROOT;
   protected int SPLASH_SCENE_WIDTH = 800;
   protected int SPLASH_SCENE_HEIGHT = 500;
-
 
   public SplashScreen() {
     SPlASH_SCREEN_ROOT = new Group();
@@ -62,6 +62,7 @@ public class SplashScreen {
     startButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
 
     // startButton.setOnAction(event -> START THE PROGRAM;
+    startButton.setOnAction(event -> Main.startGUI());
 
     v.getChildren().addAll(title, pickLanguageText, languageButtons,
         pickAppText, appButtons, pickStyleText,

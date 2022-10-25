@@ -13,12 +13,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
 
+    // HAVE TO FIX THIS MAKE NONSTATIC
+    public static Stage mainStage;
     /**
      * @see Application#start(Stage)
      */
     @Override
     public void start (Stage primaryStage) {
-
+        saveMainStage(primaryStage);
         SplashScreen startupScreen = new SplashScreen();
         primaryStage.setTitle(startupScreen.SPLASH_TITLE);
         primaryStage.setScene(startupScreen.createScene());
@@ -47,7 +49,16 @@ public class Main extends Application {
         return Double.parseDouble(resources.getString("Version"));
     }
 
-    public void startGUI() {
-        
+    public void saveMainStage(Stage stage) {
+        this.mainStage = stage;
+    }
+
+    public static void startGUI() {
+        GUI gui = new GUI();
+        CellSociety cellSociety = new CellSociety();
+
+        mainStage.setScene(gui.setupScene());
+        mainStage.setTitle("Cell Society");
+        mainStage.show();
     }
 }
