@@ -9,7 +9,7 @@ public class GridCell {
 
 
     public GridCell(int squareSize){
-        rectangle = new Rectangle(50, 50);
+        rectangle = new Rectangle(squareSize, squareSize);
         rectangle.getStyleClass().add("rectangle");
     }
 

@@ -48,11 +48,9 @@ public class GUI {
         leftPanel = new VBox();
 
         // FIXME: use game options
-        gridDisplay = new GridDisplay(50, 50);
-        // FIXME with resources
+        gridDisplay = new GridDisplay(15, 15);
         gridDisplay.getGrid().setAlignment(Pos.CENTER);
-//        gridDisplay.getGrid().setLayoutX(20);
-//        gridDisplay.getGrid().setLayoutY(40);
+        StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 
         // style the panels
         guiWindow.getStyleClass().add("large-panes");
@@ -66,10 +64,9 @@ public class GUI {
         guiWindow.setPrefSize(properties.getGUIProperty("guiWidth"),
                             properties.getGUIProperty("guiHeight"));
 
-        gridPanel.setPrefSize(properties.getGUIProperty("gridWidth"),
+        gridPanel.setMinSize(properties.getGUIProperty("gridWidth"),
                             properties.getGUIProperty("gridHeight"));
         gridPanel.getChildren().add(gridDisplay.getGrid());
-        gridPanel.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 
         bottomPanel.setPrefSize(properties.getGUIProperty("bottomPanelWidth"),
                                 properties.getGUIProperty("bottomPanelHeight"));
@@ -82,7 +79,11 @@ public class GUI {
         // set up scene
         Scene scene = new Scene(guiWindow, properties.getGUIProperty("guiWidth"),
                                             properties.getGUIProperty("guiHeight"));
-        scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
+        try{
+            scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
+        } catch(NullPointerException e){
+            throw new NullPointerException("Resource styleguide not found.");
+        }
         return scene;
     }
 
