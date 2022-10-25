@@ -1,6 +1,5 @@
 package cellsociety.parsing;
 
-import cellsociety.alternativeModel.cell.Cell;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
