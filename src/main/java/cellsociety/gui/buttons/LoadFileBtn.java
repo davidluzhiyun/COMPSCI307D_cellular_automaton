@@ -18,7 +18,7 @@ import static java.lang.Integer.parseInt;
  *
  * @author dm396
  */
-public class LoadFileBtn extends GUIBtn{
+public class LoadFileBtn extends GUIBtn {
     private FileChooser fileChooser;
 
     public LoadFileBtn(String btnText, String iconID) {

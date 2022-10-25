@@ -18,9 +18,8 @@ import javafx.scene.text.TextAlignment;
  * Adapted from Logo splash screen right now, have to connect action events to controller methods
  * Use reflection to do this from resource files
  *
- *
  * @author armanshekarriz
- * @author Nicki Lee (adapted from structure in Oolala)
+ * @author Nicki & Eloise (adapted from structure designed by team for Splash screen in Oolala)
  */
 
 public class SplashScreen {

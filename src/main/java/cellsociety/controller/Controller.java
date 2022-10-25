@@ -4,7 +4,7 @@ import cellsociety.gui.GUI;
 import cellsociety.gui.GUIPropertiesLoader;
 import cellsociety.gui.SimInformationDisplay;
 
-public class FrontendActionController {
+public class Controller {
 
   private GUI simGUI;
   private GUIPropertiesLoader GUIprops;
@@ -16,7 +16,7 @@ public class FrontendActionController {
    * to be able to make the view based on the game, and therefore have instances
    * of necessary GUI classes
    */
-  public FrontendActionController(GUI gui) {
+  public Controller(GUI gui) {
     simGUI = gui;
   }
 

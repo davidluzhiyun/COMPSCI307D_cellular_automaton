@@ -111,4 +111,7 @@ public class GameModel {
   public int getMaxY() {
     return maxY;
   }
+
+
+
 }

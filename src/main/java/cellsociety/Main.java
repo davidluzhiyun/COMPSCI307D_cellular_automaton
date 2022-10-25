@@ -13,11 +13,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
 
+
+
     /**
      * @see Application#start(Stage)
      */
     @Override
     public void start (Stage primaryStage) {
+
         SplashScreen startupScreen = new SplashScreen();
         primaryStage.setTitle(startupScreen.SPLASH_TITLE);
         primaryStage.setScene(startupScreen.createScene());
@@ -45,4 +48,6 @@ public class Main extends Application {
         ResourceBundle resources = ResourceBundle.getBundle(INTERNAL_CONFIGURATION);
         return Double.parseDouble(resources.getString("Version"));
     }
+
+
 }
