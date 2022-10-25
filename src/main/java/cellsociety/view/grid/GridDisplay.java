@@ -1,7 +1,10 @@
-package cellsociety.gui.grid;
+package cellsociety.view.grid;
 
-import cellsociety.gui.GUI;
+import cellsociety.view.GUI;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author dm396
@@ -13,8 +16,14 @@ public class GridDisplay {
     private int vGap;
     private int hGap;
     private int squareSize;
+
+    private GridCellColorMap colorMap;
+    private List<List<Integer>> cellStates;
+    private List<List<GridCell>> cellGraphics;
+
     public GridDisplay(int rows, int cols){
         pane = new GridPane();
+        colorMap = new GridCellColorMap(10); //FIXME: Use game parameters
 
         // set gap size between cells
         vGap = GUI.properties.getGUIProperty("gridCellVGap");
@@ -25,19 +34,34 @@ public class GridDisplay {
         this.rows = rows;
         this.cols = cols;
 
-        this.populateGrid();
+        this.initializeGrid();
     }
 
-    private void populateGrid(){
-        //FIXME: This is a placeholder. implement real grid code.
-        calculateCellDimensions();
+    public void updateGridVisualization(List<List<Integer>> cellStates){
+        if(cellStates.size() != rows || cellStates.get(0).size() != cols){
+            throw new RuntimeException("Updated cell state dimensions do not match!");
+        }
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
-                GridCell cell = new GridCell(squareSize);
-                pane.add(cell.getGraphic(), i, j);
+                GridCell cell = cellGraphics.get(i).get(j);
+                int state = cellStates.get(i).get(j);
+                cell.getGraphic().setFill(colorMap.getColor(0));    //FIXME: colorIndex should be from state
             }
         }
+    }
 
+    private void initializeGrid(){
+        cellGraphics = new ArrayList<List<GridCell>>();
+        calculateCellDimensions();
+        for(int i = 0; i < rows; i++){
+            cellGraphics.add(new ArrayList<GridCell>());
+
+            for(int j = 0; j < cols; j++){
+                GridCell cell = new GridCell(squareSize, colorMap.getColor(0)); //FIXME: colorIndex should be from model
+                pane.add(cell.getGraphic(), i, j);
+                cellGraphics.get(i).add(cell);
+            }
+        }
     }
 
     /**

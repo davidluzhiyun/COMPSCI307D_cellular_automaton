@@ -1,15 +1,8 @@
-package cellsociety.gui;
+package cellsociety.view;
 
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
-import javafx.scene.control.Alert.AlertType;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 
 /**
  * This class generates an interactive file explorer for the user to select a data file.

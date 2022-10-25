@@ -1,7 +1,7 @@
-package cellsociety.gui.buttons;
+package cellsociety.view.buttons;
 
-import cellsociety.gui.GUI;
-import cellsociety.gui.GUIPropertiesLoader;
+import cellsociety.view.GUI;
+import cellsociety.view.GUIPropertiesLoader;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
  *
  * @author dm396
  */
-public abstract class GUIBtn {
+public abstract class GUIButton {
     private Button btn;
     private ImageView icon;
 
@@ -26,12 +26,12 @@ public abstract class GUIBtn {
      * @param btnText the button's text
      * @param iconID the RESOURCE name that maps the icon's filepath
      */
-    public GUIBtn(String btnText, String iconID){
+    public GUIButton(String btnText, String iconID){
         GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
         // load the graphic using resources
         ResourceBundle iconResources = ResourceBundle.getBundle(GUI.GUI_ICON_PROPERTIES);
-        InputStream iconPath = LoadFileBtn.class.getClassLoader().getResourceAsStream(
+        InputStream iconPath = LoadFileButton.class.getClassLoader().getResourceAsStream(
                                     iconResources.getString(iconID));
 
         // set icon graphic appearances

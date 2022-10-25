@@ -16,10 +16,18 @@
     -fx-border-width: 3;
 }
 
+.grid-cell {
+    -fx-background-color: #2969c0;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+}
+
+
 .rectangle {
     -fx-background-color: #2969c0;
     -fx-background-radius: 10px;
-
     -fx-border-radius: 10px;
     -fx-border-width: 5px;
     -fx-border-color: black;

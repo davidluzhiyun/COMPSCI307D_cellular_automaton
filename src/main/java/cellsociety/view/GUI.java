@@ -1,14 +1,13 @@
-package cellsociety.gui;
+package cellsociety.view;
 
-import cellsociety.gui.buttons.LoadFileBtn;
-import cellsociety.gui.buttons.SaveFileBtn;
-import cellsociety.gui.buttons.animation_control.AnimationPlayPauseBtn;
-import cellsociety.gui.buttons.animation_control.AnimationSpeedSelector;
-import cellsociety.gui.buttons.animation_control.AnimationStepForwardButton;
-import cellsociety.gui.grid.GridDisplay;
+import cellsociety.view.buttons.LoadFileButton;
+import cellsociety.view.buttons.SaveFileButton;
+import cellsociety.view.buttons.animation_control.AnimationPlayPauseButton;
+import cellsociety.view.buttons.animation_control.AnimationSpeedSelector;
+import cellsociety.view.buttons.animation_control.AnimationStepForwardButton;
+import cellsociety.view.grid.GridDisplay;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 
 /**
@@ -99,8 +98,8 @@ public class GUI {
 
         // organizes buttons in a horizontal container
         HBox buttonContainer = new HBox();
-        LoadFileBtn loadFileButton = new LoadFileBtn("Load File", "openFileIconPath");
-        SaveFileBtn saveFileBtn = new SaveFileBtn("Save File", "saveFileIconPath");
+        LoadFileButton loadFileButton = new LoadFileButton("Load File", "openFileIconPath");
+        SaveFileButton saveFileBtn = new SaveFileButton("Save File", "saveFileIconPath");
 
         // TODO: implement simulation info class
         SimInformationDisplay info = new SimInformationDisplay("""
@@ -118,7 +117,7 @@ public class GUI {
 
     private void setupBottomPanel(){
         HBox buttonContainer = new HBox();
-        AnimationPlayPauseBtn playPauseBtn = new AnimationPlayPauseBtn("Play/Pause", "playpause");
+        AnimationPlayPauseButton playPauseBtn = new AnimationPlayPauseButton("Play/Pause", "playpause");
         AnimationSpeedSelector speedSelector = new AnimationSpeedSelector("Speed", "speed");
         AnimationStepForwardButton stepForwardButton = new AnimationStepForwardButton("Step", "step");
 

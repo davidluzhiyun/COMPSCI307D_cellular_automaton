@@ -1,19 +1,19 @@
-package cellsociety.gui.buttons.animation_control;
+package cellsociety.view.buttons.animation_control;
 
-import cellsociety.gui.buttons.GUIBtn;
+import cellsociety.view.buttons.GUIButton;
 
 /**
  *
  * @author dm396
  */
-public class AnimationPlayPauseBtn extends GUIBtn {
+public class AnimationSpeedSelector extends GUIButton {
     /**
      * Creates a JavaFX button with a specified graphic
      *
      * @param btnText the button's text
      * @param iconID  the RESOURCE name that maps the icon's filepath
      */
-    public AnimationPlayPauseBtn(String btnText, String iconID) {
+    public AnimationSpeedSelector(String btnText, String iconID) {
         super(btnText, iconID);
     }
 }
