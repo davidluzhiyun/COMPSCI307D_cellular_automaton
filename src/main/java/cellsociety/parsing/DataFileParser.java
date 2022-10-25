@@ -19,6 +19,14 @@ public class DataFileParser {
     private File dataFile;
     private int rows;
     private int columns;
+    private double parameters;
+    private String type;
+    private String title;
+    private String initialStates;
+    private String author;
+    private String description;
+    private String[] stateColors;
+    public static final String GAME_FILE_PATHWAY = "data/";
 
     public DataFileParser(File dataFile){
         this.dataFile = dataFile;
@@ -27,7 +35,84 @@ public class DataFileParser {
 //Code for reading the CSV file from:
 // https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
 // Java code to illustrate reading a file all data at once
-    public static List<String[]> readAllDataAtOnce(String file) {
+    private Grid simulationFileParser(String simulationFile){
+        parameters = 0;
+        List<String[]> simulationInformation = readAllDataAtOnce(simulationFile);
+        for(String[] simulationLine : simulationInformation){
+            int equalsIndex = simulationLine[0].indexOf("=");
+            String neededInformation = simulationLine[0].substring(equalsIndex);
+            if(simulationLine[0].contains("Type")){
+                type = neededInformation;
+            } else if (simulationLine[0].contains("Title")) {
+                title = neededInformation;
+            } else if (simulationLine[0].contains("Author")) {
+                author = neededInformation;
+            } else if (simulationLine[0].contains("Description")) {
+                description = neededInformation;
+            } else if (simulationLine[0].contains("InitialStates")) {
+                initialStates = neededInformation;
+            } else if (simulationLine[0].contains("Parameters")) {
+                parameters = Double.parseDouble(neededInformation);
+            } else if (simulationLine[0].contains("StateColors")) {
+                stateColors = neededInformation.split(",");
+            }
+        }
+        Grid simulationGrid = csvParser(initialStates, type, parameters, stateColors);
+        return simulationGrid;
+    }
+    private Grid csvParser(String gameOfLifeFile, String type, double parameters, String[] stateColors){
+        List<String[]> gridValues = readAllDataAtOnce(gameOfLifeFile);
+        //new grid
+        if(gridValues == null){
+            //Add exception for null
+        }
+        //Add map of enum values
+        rows = Integer.parseInt(gridValues.get(0)[0]);
+        columns = Integer.parseInt(gridValues.get(0)[1]);
+        DeadCell gridDefault = new DeadCell();
+        Grid cellGrid = new Grid(rows, columns, gridDefault);
+        switch(type.toUpperCase()){
+            case ("GAMEOFLIFE") -> {
+                gameOfLifeSetup(gridValues, cellGrid, rows, columns);
+            }
+            case ("FIRE") -> {
+                fireSetup(gridValues, cellGrid, rows, columns);
+            }
+            case ("PERCOLATION") -> {
+                percolationSetup(gridValues, cellGrid, rows, columns);
+            }
+            case ("ROCKPAPERSCISSOR") -> {
+                rockPaperScissorsSetup(gridValues, cellGrid, rows, columns);
+            }
+            case ("SEGREGATION") -> {
+                segregationSetup(gridValues, cellGrid, rows, columns);
+            }
+            case ("WATORWORLD") -> {
+                watorWorldSetup(gridValues, cellGrid, rows, columns);
+            }
+        }
+        return cellGrid;
+    }
+
+
+
+
+
+    private static void gameOfLifeSetup(List<String[]> gridValues, Grid cellGrid, int rows, int columns){
+        for(int r = 1; r < rows + 1; r++){
+            for(int c = 0; c < columns; c++){
+                int newCellType = Integer.parseInt(gridValues.get(r)[c]);
+                if(newCellType == 0){
+                    cellGrid.putCellAt(r-1, c, new DeadCell());
+                }
+                else if(newCellType == 1){
+                    cellGrid.putCellAt(r-1, c, new AliveCell());
+                }
+            }
+        }
+    }
+
+    private static List<String[]> readAllDataAtOnce(String file) {
         List<String[]> allData = null;
         try {
             // Create an object of file reader
@@ -41,30 +126,6 @@ public class DataFileParser {
             e.printStackTrace();
         }
         return allData;
-    }
-    private Grid gameOfLifeParser(String gameOfLifeFile){
-        List<String[]> gridValues = readAllDataAtOnce(gameOfLifeFile);
-        //new grid
-        if(gridValues == null){
-            
-        }
-        //Add map of enum values
-        rows = Integer.parseInt(gridValues.get(0)[0]);
-        columns = Integer.parseInt(gridValues.get(0)[1]);
-        DeadCell gridDefault = new DeadCell();
-        Grid cellGrid = new Grid(rows, columns, gridDefault);
-        for(int r = 1; r < rows + 1; r++){
-            for(int c = 0; c < columns; c++){
-                int newCellType = Integer.parseInt(gridValues.get(r)[c]);
-                if(newCellType == 0){
-                    cellGrid.putCellAt(r-1, c, new DeadCell());
-                }
-                else if(newCellType == 1){
-                    cellGrid.putCellAt(r-1, c, new AliveCell());
-                }
-            }
-        }
-        return cellGrid;
     }
 
     // NOTE: the following methods were provided by the professor for us to use
