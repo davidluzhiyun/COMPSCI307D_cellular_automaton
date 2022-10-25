@@ -1,4 +1,4 @@
-package cellsociety.parsing;
+package cellsociety.controller;
 
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;

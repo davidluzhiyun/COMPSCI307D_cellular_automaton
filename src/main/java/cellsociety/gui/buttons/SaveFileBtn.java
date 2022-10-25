@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
  *
  * @author dm396
  */
-public class SaveFileBtn extends GUIBtn{
+public class SaveFileBtn extends GUIBtn {
     public SaveFileBtn(String btnText, String iconID) {
         super(btnText, iconID);
         this.setOnClickEvent(this::event);

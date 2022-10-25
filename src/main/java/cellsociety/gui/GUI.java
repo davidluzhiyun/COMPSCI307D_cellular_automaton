@@ -24,6 +24,10 @@ public class GUI {
     // Style guides
     private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/JFXGraphicStyles.css";
 
+    // use these instead of the other option based on splash screen selection
+    private static final String DARK_THEME_RESOURCE = "/cellsociety/css/DarkTheme.css";
+    private static final String LIGHT_THEME_RESOURCE = "/cellsociety/css/LightTheme.css";
+
     // Set of panels that organizes GUI elements
     private BorderPane guiWindow;
     private AnchorPane gridPanel;
@@ -126,4 +130,5 @@ public class GUI {
                                             stepForwardButton.getBtn());
         bottomPanel.getChildren().add(buttonContainer);
     }
+
 }
