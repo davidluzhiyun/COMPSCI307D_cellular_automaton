@@ -1,6 +1,5 @@
 package cellsociety.parsing;
 
-import cellsociety.alternativeModel.cell.Cell;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
@@ -71,34 +70,15 @@ public class DataFileParser {
         columns = Integer.parseInt(gridValues.get(0)[1]);
         DeadCell gridDefault = new DeadCell();
         Grid cellGrid = new Grid(rows, columns, gridDefault);
-        switch(type.toUpperCase()){
-            case ("GAMEOFLIFE") -> {
-                gameOfLifeSetup(gridValues, cellGrid, rows, columns);
-            }
-            case ("FIRE") -> {
-                fireSetup(gridValues, cellGrid, rows, columns);
-            }
-            case ("PERCOLATION") -> {
-                percolationSetup(gridValues, cellGrid, rows, columns);
-            }
-            case ("ROCKPAPERSCISSOR") -> {
-                rockPaperScissorsSetup(gridValues, cellGrid, rows, columns);
-            }
-            case ("SEGREGATION") -> {
-                segregationSetup(gridValues, cellGrid, rows, columns);
-            }
-            case ("WATORWORLD") -> {
-                watorWorldSetup(gridValues, cellGrid, rows, columns);
-            }
-        }
+        gridSetup(gridValues, cellGrid, type, stateColors, parameters, rows, columns);
         return cellGrid;
     }
-
-
-
-
-
-    private static void gameOfLifeSetup(List<String[]> gridValues, Grid cellGrid, int rows, int columns){
+    /**
+     * Implement the different systems that will use the additional parameters besides just the rows and columns for the grid
+     * For now the default is simply a game of life grid
+     * The method would take in the type and then go from there, possibly extending another method
+    */
+    private static void gridSetup(List<String[]> gridValues, Grid cellGrid, String type, String[] stateColors, double parameters, int rows, int columns){
         for(int r = 1; r < rows + 1; r++){
             for(int c = 0; c < columns; c++){
                 int newCellType = Integer.parseInt(gridValues.get(r)[c]);
