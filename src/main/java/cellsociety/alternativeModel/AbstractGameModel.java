@@ -108,6 +108,7 @@ public abstract class AbstractGameModel {
   protected void setGrid(Map<Coordinate, AbstractCell> newGrid){
     try {
       assert newGrid != null;
+      grid = new HashMap<>(newGrid);
     }
     catch (AssertionError e){
       System.out.println("Input can't be null");

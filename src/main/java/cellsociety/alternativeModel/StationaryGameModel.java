@@ -35,7 +35,7 @@ public class StationaryGameModel extends AbstractGameModel{
           myFuture.put(new Coordinate(i, j), ((StationaryCell) selected).update(getMooreNeighbours(i,j)));
         }
       }
-      setGrid(new HashMap<Coordinate, AbstractCell>(myFuture));
+      setGrid(myFuture);
     }
     catch (AssertionError e){
       System.out.println("Cell is of wrong subclass");

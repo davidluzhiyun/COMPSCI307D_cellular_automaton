@@ -2,6 +2,7 @@ package cellsociety.alternativeModel;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import cellsociety.alternativeModel.cell.CellType;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
 import org.junit.jupiter.api.Test;
@@ -31,13 +32,13 @@ class GridTest {
   void operationsGood() {
     myGrid.putCellAt(1,2,new AliveCell());
     assertInstanceOf(AliveCell.class,myGrid.getCellAt(1,2));
-    assertEquals(1,myGrid.getTypeTagAt(1,2));
+    assertEquals(CellType.ALIVE,myGrid.getTypeTagAt(1,2));
   }
 
   @Test
   void operationsNullHandle(){
     assertInstanceOf(DeadCell.class,myGrid.getCellAt(4,5));
-    assertEquals(0,myGrid.getTypeTagAt(4,5));
+    assertEquals(CellType.DEAD,myGrid.getTypeTagAt(4,5));
   }
 
   @Test
