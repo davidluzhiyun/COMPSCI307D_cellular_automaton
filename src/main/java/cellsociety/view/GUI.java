@@ -47,7 +47,7 @@ public class GUI {
         leftPanel = new VBox();
 
         // FIXME: use game options
-        gridDisplay = new GridDisplay(15, 15);
+        gridDisplay = new GridDisplay(50, 50);
         gridDisplay.getGrid().setAlignment(Pos.CENTER);
         StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 

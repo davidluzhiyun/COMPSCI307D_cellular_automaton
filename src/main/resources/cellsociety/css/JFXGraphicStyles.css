@@ -11,9 +11,8 @@
 .large-panes {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10;
-
-    -fx-border-color: darkgray;
-    -fx-border-width: 3;
+    -fx-border-color: black;
+    -fx-border-width: 1;
 }
 
 .grid-cell {
@@ -23,7 +22,6 @@
     -fx-border-width: 5px;
     -fx-border-color: black;
 }
-
 
 .rectangle {
     -fx-background-color: #2969c0;

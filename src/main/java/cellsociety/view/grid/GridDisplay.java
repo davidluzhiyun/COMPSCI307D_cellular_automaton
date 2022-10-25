@@ -69,7 +69,7 @@ public class GridDisplay {
      * smallest grid cell size needed.
      */
     private void calculateCellDimensions(){
-        int padding = Math.max(cols*vGap, rows*vGap)/2 + 2*GUI.properties.getGUIProperty("gridBorderOffsets");
+        int padding = Math.max(cols*vGap, rows*vGap) + 4*GUI.properties.getGUIProperty("gridBorderOffsets");
         int gridWidth = GUI.properties.getGUIProperty("gridWidth") - padding;
         int gridHeight = GUI.properties.getGUIProperty("gridHeight") - padding;
 
