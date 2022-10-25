@@ -4,6 +4,7 @@ import cellsociety.alternativeModel.cell.AbstractCell;
 import cellsociety.alternativeModel.cell.CellType;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Wrapper around Hashmap, facilitate communication between parser
@@ -12,15 +13,19 @@ import java.util.Map;
  * @author david_luzhiyun
  */
 public class Grid implements ImmutableTypeGrid{
+  public static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  public static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "ModelErrors";
   // Class variables
   private int maxX;
   private int maxY;
   private Map<Coordinate, AbstractCell> myMap;
   // Pretend null is this cell
   private AbstractCell nullHandler;
+  private ResourceBundle myErrorResources;
 
   public Grid(int X, int Y, AbstractCell defaultCell){
     try {
+      myErrorResources = ResourceBundle.getBundle(DEFAULT_ERRORS_RESOURCE_PACKAGE);
       maxX = X;
       maxY = Y;
       myMap = new HashMap<>();
@@ -51,7 +56,7 @@ public class Grid implements ImmutableTypeGrid{
           assert nullHandler != null;
         }
         catch (AssertionError e){
-          System.out.println("Uninitialized Cell");
+          System.out.println(myErrorResources.getString("uninitializedCell"));
           throw e;
         }
 
@@ -62,7 +67,7 @@ public class Grid implements ImmutableTypeGrid{
       }
     }
     catch (AssertionError e){
-      System.out.println("Tried to get a cell out of bound for Grid");
+      System.out.println(myErrorResources.getString("outOfBound"));
       throw e;
     }
   }
@@ -77,7 +82,6 @@ public class Grid implements ImmutableTypeGrid{
       return myCell.getType();
     }
     catch (AssertionError e){
-      System.out.println("Error when getTypeTagAt tries to call getCellAt");
       throw e;
     }
   }

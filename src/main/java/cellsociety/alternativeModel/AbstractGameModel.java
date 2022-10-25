@@ -5,6 +5,7 @@ import cellsociety.alternativeModel.cell.CellType;
 import cellsociety.alternativeModel.cell.EmptyCell;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Abstract Game Model, initialize with a grid, and output a grid. Has
@@ -13,8 +14,11 @@ import java.util.Map;
  */
 
 public abstract class AbstractGameModel {
+  public static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  public static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "ModelErrors";
   //class variables
   private Map<Coordinate, AbstractCell> grid;
+  private ResourceBundle myErrorResources;
 
 
   // size of the grid
@@ -24,6 +28,7 @@ public abstract class AbstractGameModel {
 
   public AbstractGameModel(Grid inputGrid) throws NullPointerException{
     try {
+      myErrorResources  = ResourceBundle.getBundle(DEFAULT_ERRORS_RESOURCE_PACKAGE);
       maxX = inputGrid.getMaxX();
       maxY = inputGrid.getMaxY();
       grid = new HashMap<>();
@@ -34,7 +39,7 @@ public abstract class AbstractGameModel {
       }
     }
     catch (NullPointerException e){
-      System.out.println("Input can't be null");
+      System.out.println(myErrorResources.getString("inputNull"));
       throw e;
     }
   }
@@ -85,7 +90,7 @@ public abstract class AbstractGameModel {
       return grid.get(new Coordinate(X,Y));
     }
     catch (AssertionError e){
-      System.out.println("Tried to get a cell out of bound for Grid");
+      System.out.println(myErrorResources.getString("outOfBound"));
       throw e;
     }
 
@@ -111,7 +116,7 @@ public abstract class AbstractGameModel {
       grid = new HashMap<>(newGrid);
     }
     catch (AssertionError e){
-      System.out.println("Input can't be null");
+      System.out.println(myErrorResources.getString("inputNull"));
       throw e;
     }
   }
@@ -133,7 +138,7 @@ public abstract class AbstractGameModel {
     return output;
   }
 
-  // getter for passing this info to subclasses, where it is needed for updating
+  // Getters for passing this info to subclasses, where it is needed for updating
   // No error handling because Grid already rules out invalid maxX maxY's
   public int getMaxX() {
     return maxX;
@@ -141,5 +146,10 @@ public abstract class AbstractGameModel {
 
   public int getMaxY() {
     return maxY;
+  }
+  // Getter for passing the ResourceBundles to subclasses
+
+  public ResourceBundle getMyErrorResources() {
+    return myErrorResources;
   }
 }

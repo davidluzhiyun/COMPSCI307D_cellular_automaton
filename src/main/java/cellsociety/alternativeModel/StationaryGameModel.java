@@ -38,7 +38,7 @@ public class StationaryGameModel extends AbstractGameModel{
       setGrid(myFuture);
     }
     catch (AssertionError e){
-      System.out.println("Cell is of wrong subclass");
+      System.out.println(getMyErrorResources().getString("wrongType"));
       throw e;
     }
   }
