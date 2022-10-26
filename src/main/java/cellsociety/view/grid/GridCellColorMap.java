@@ -1,7 +1,6 @@
 package cellsociety.view.grid;
 
 import cellsociety.view.GUI;
-import javafx.scene.SubScene;
 import javafx.scene.paint.Color;
 
 import java.util.HashMap;
@@ -23,7 +22,7 @@ public class GridCellColorMap {
         for(int colorIndex = 0; colorIndex < numberOfStates; colorIndex++){
             String color = GUI.properties.getColorProperty(colorIndex);
             colorMap.put(colorIndex, Color.web(color));
-//            System.out.println(colorIndex + " " + color); TODO: use this in your testing!
+//            System.out.println(colorIndex + " " + color); //TODO: use this in your testing!
         }
     }
 

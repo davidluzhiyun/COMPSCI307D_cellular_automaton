@@ -1,11 +1,17 @@
 .button {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px;
-    -fx-pref-height: 40px;
-    -fx-pref-width: 40px;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 30px;
     -fx-border-radius: 10px;
     -fx-border-width: 2px;
     -fx-border-color: black;
+}
+
+.text {
+    -fx-font: helvetica;
+    -fx-font-smoothing-type: gray;
+    -fx-strikethrough: true;
 }
 
 .large-panes {
@@ -30,3 +36,4 @@
     -fx-border-width: 5px;
     -fx-border-color: black;
 }
+

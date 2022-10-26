@@ -8,7 +8,11 @@ import cellsociety.view.buttons.animation_control.AnimationStepForwardButton;
 import cellsociety.view.grid.GridDisplay;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
 
 /**
  * This class encapsulates the entire user interface, which includes all buttons
@@ -47,7 +51,7 @@ public class GUI {
         leftPanel = new VBox();
 
         // FIXME: use game options
-        gridDisplay = new GridDisplay(50, 50);
+        gridDisplay = new GridDisplay(20, 40);
         gridDisplay.getGrid().setAlignment(Pos.CENTER);
         StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 
@@ -109,8 +113,8 @@ public class GUI {
                 """);
 
         // add all elements to panel group
-        buttonContainer.getChildren().addAll(loadFileButton.getBtn(),
-                                             saveFileBtn.getBtn());
+        buttonContainer.getChildren().addAll(loadFileButton.getButton(),
+                                             saveFileBtn.getButton());
         leftPanel.setSpacing(properties.getGUIProperty("leftPanelVertSpacing"));
         leftPanel.getChildren().addAll(buttonContainer, info.getGraphic());
     }
@@ -121,9 +125,9 @@ public class GUI {
         AnimationSpeedSelector speedSelector = new AnimationSpeedSelector("Speed", "speed");
         AnimationStepForwardButton stepForwardButton = new AnimationStepForwardButton("Step", "step");
 
-        buttonContainer.getChildren().addAll(playPauseBtn.getBtn(),
-                                            speedSelector.getBtn(),
-                                            stepForwardButton.getBtn());
+        buttonContainer.getChildren().addAll(playPauseBtn.getButton(),
+                                            speedSelector.getButton(),
+                                            stepForwardButton.getButton());
         bottomPanel.getChildren().add(buttonContainer);
     }
 
