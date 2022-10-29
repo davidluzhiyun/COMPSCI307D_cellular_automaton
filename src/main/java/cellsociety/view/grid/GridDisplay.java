@@ -2,6 +2,7 @@ package cellsociety.view.grid;
 
 import cellsociety.view.GUI;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @author dm396
  */
 public class GridDisplay {
-    GridPane pane;
+    private GridPane pane;
     private int rows;
     private int cols;
     private int vGap;
@@ -34,7 +35,7 @@ public class GridDisplay {
         this.rows = rows;
         this.cols = cols;
 
-        this.initializeGrid();
+        this.initializeGrid();  //TODO:
     }
 
     public void updateGridVisualization(List<List<Integer>> cellStates){
@@ -50,7 +51,7 @@ public class GridDisplay {
         }
     }
 
-    private void initializeGrid(){
+    public void initializeGrid(){
         cellGraphics = new ArrayList<List<GridCell>>();
         calculateCellDimensions();
         for(int i = 0; i < rows; i++){

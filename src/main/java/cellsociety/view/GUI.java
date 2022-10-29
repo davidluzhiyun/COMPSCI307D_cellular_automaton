@@ -6,12 +6,16 @@ import cellsociety.view.buttons.animation_control.AnimationPlayPauseButton;
 import cellsociety.view.buttons.animation_control.AnimationSpeedSelector;
 import cellsociety.view.buttons.animation_control.AnimationStepForwardButton;
 import cellsociety.view.grid.GridDisplay;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 
 /**
@@ -31,7 +35,8 @@ public class GUI {
     private StackPane gridPanel;
     private VBox leftPanel;
     private HBox bottomPanel;
-    GridDisplay gridDisplay;
+    private GridDisplay gridDisplay;
+    private VBox gridContainer;
 
     public static final GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
@@ -49,33 +54,23 @@ public class GUI {
         gridPanel = new StackPane();
         bottomPanel = new HBox();
         leftPanel = new VBox();
+        gridContainer = new VBox();
 
-        // FIXME: use game options
-        gridDisplay = new GridDisplay(20, 40);
-        gridDisplay.getGrid().setAlignment(Pos.CENTER);
-        StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
 
         // style the panels
         guiWindow.getStyleClass().add("large-panes");
-        gridPanel.getStyleClass().add("large-panes");
         bottomPanel.getStyleClass().add("large-panes");
 
         setupLeftPanel();
         setupBottomPanel();
+        setupGridPanel();
 
         // set panel dimensions
         guiWindow.setPrefSize(properties.getGUIProperty("guiWidth"),
                             properties.getGUIProperty("guiHeight"));
 
-        gridPanel.setMinSize(properties.getGUIProperty("gridWidth"),
-                            properties.getGUIProperty("gridHeight"));
-        gridPanel.getChildren().add(gridDisplay.getGrid());
-
-        bottomPanel.setPrefSize(properties.getGUIProperty("bottomPanelWidth"),
-                                properties.getGUIProperty("bottomPanelHeight"));
-
         // sets panel positions within the larger GUI window
-        guiWindow.setCenter(gridPanel);
+        guiWindow.setCenter(gridContainer);
         guiWindow.setBottom(bottomPanel);
         guiWindow.setLeft(leftPanel);
 
@@ -115,8 +110,35 @@ public class GUI {
         // add all elements to panel group
         buttonContainer.getChildren().addAll(loadFileButton.getButton(),
                                              saveFileBtn.getButton());
+        buttonContainer.setSpacing(properties.getGUIProperty("defaultElementSpacing"));
         leftPanel.setSpacing(properties.getGUIProperty("leftPanelVertSpacing"));
+        leftPanel.setPadding(new Insets(properties.getGUIProperty("leftPanelBorderOffset")));
         leftPanel.getChildren().addAll(buttonContainer, info.getGraphic());
+        VBox.setMargin(buttonContainer, new Insets(70, 0 ,0, 0));
+
+
+    }
+
+    private void setupGridPanel(){
+        // FIXME: use game options
+//         = new VBox();
+
+        gridDisplay = new GridDisplay(10, 10);
+        gridDisplay.getGrid().setAlignment(Pos.CENTER);
+
+//        gridPanel.getStyleClass().add("large-panes");
+        gridPanel.setMinSize(properties.getGUIProperty("gridWidth"),
+                properties.getGUIProperty("gridHeight"));
+
+        Text simulationTitle = new Text("Game of Life"); //FIXME: Use game settings
+        simulationTitle.setFont(Font.font("Helvetica", FontWeight.BOLD, 32));
+
+
+        gridPanel.getChildren().addAll(simulationTitle, gridDisplay.getGrid());
+        StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
+        gridContainer.getChildren().addAll(simulationTitle, gridPanel);
+        gridContainer.setAlignment(Pos.CENTER);
+        VBox.setMargin(simulationTitle, new Insets(20, 0 ,0, 0));
     }
 
     private void setupBottomPanel(){
@@ -128,7 +150,13 @@ public class GUI {
         buttonContainer.getChildren().addAll(playPauseBtn.getButton(),
                                             speedSelector.getButton(),
                                             stepForwardButton.getButton());
+        buttonContainer.setSpacing(properties.getGUIProperty("defaultElementSpacing"));
+
         bottomPanel.getChildren().add(buttonContainer);
+        bottomPanel.setPrefSize(properties.getGUIProperty("bottomPanelWidth"),
+                properties.getGUIProperty("bottomPanelHeight"));
+        bottomPanel.setPadding(new Insets(properties.getGUIProperty("bottomPanelBorderOffset")));
+        bottomPanel.setAlignment(Pos.CENTER_RIGHT);
     }
 
 }

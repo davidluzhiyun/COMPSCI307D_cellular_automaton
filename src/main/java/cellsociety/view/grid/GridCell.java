@@ -13,6 +13,8 @@ public class GridCell {
         rectangle = new Rectangle(squareSize, squareSize);
         rectangle.setStroke(Color.BLACK);
         rectangle.setFill(color);
+        rectangle.setStyle("-fx-background-radius: 2px;");
+        rectangle.setStyle("-fx-border-radius: 2px;");
     }
 
     public Rectangle getGraphic(){
