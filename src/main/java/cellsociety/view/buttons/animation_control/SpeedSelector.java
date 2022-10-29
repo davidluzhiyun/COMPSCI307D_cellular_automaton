@@ -5,7 +5,7 @@ import cellsociety.view.buttons.GUIButton;
 /**
  * @author dm396
  */
-public class AnimationStepForwardButton extends GUIButton {
+public class SpeedSelector extends GUIButton {
 
   /**
    * Creates a JavaFX button with a specified graphic
@@ -13,7 +13,7 @@ public class AnimationStepForwardButton extends GUIButton {
    * @param btnText the button's text
    * @param iconID  the RESOURCE name that maps the icon's filepath
    */
-  public AnimationStepForwardButton(String btnText, String iconID) {
+  public SpeedSelector(String btnText, String iconID) {
     super(btnText, iconID);
   }
 }

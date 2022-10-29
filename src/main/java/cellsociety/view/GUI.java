@@ -2,9 +2,9 @@ package cellsociety.view;
 
 import cellsociety.view.buttons.LoadFileButton;
 import cellsociety.view.buttons.SaveFileButton;
-import cellsociety.view.buttons.animation_control.AnimationPlayPauseButton;
-import cellsociety.view.buttons.animation_control.AnimationSpeedSelector;
-import cellsociety.view.buttons.animation_control.AnimationStepForwardButton;
+import cellsociety.view.buttons.animation_control.PlayPauseButton;
+import cellsociety.view.buttons.animation_control.SpeedSelector;
+import cellsociety.view.buttons.animation_control.StepForwardButton;
 import cellsociety.view.grid.GridDisplay;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -143,9 +143,9 @@ public class GUI {
 
   private void setupBottomPanel() {
     HBox buttonContainer = new HBox();
-    AnimationPlayPauseButton playPauseBtn = new AnimationPlayPauseButton("Play/Pause", "playpause");
-    AnimationSpeedSelector speedSelector = new AnimationSpeedSelector("Speed", "speed");
-    AnimationStepForwardButton stepForwardButton = new AnimationStepForwardButton("Step", "step");
+    PlayPauseButton playPauseBtn = new PlayPauseButton("Play/Pause", "playpause");
+    SpeedSelector speedSelector = new SpeedSelector("Speed", "speed");
+    StepForwardButton stepForwardButton = new StepForwardButton("Step", "step");
 
     buttonContainer.getChildren().addAll(playPauseBtn.getButton(),
         speedSelector.getButton(),

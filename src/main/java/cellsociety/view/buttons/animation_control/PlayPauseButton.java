@@ -5,7 +5,7 @@ import cellsociety.view.buttons.GUIButton;
 /**
  * @author dm396
  */
-public class AnimationSpeedSelector extends GUIButton {
+public class PlayPauseButton extends GUIButton {
 
   /**
    * Creates a JavaFX button with a specified graphic
@@ -13,7 +13,7 @@ public class AnimationSpeedSelector extends GUIButton {
    * @param btnText the button's text
    * @param iconID  the RESOURCE name that maps the icon's filepath
    */
-  public AnimationSpeedSelector(String btnText, String iconID) {
+  public PlayPauseButton(String btnText, String iconID) {
     super(btnText, iconID);
   }
 }
