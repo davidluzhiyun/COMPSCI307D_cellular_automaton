@@ -1,4 +1,4 @@
-package cellsociety.model;
+package cellsociety.outdatedModelPendingDeletion;
 
 public class CellGrid {
   private CellConstructor[][] grid;

@@ -1,6 +1,6 @@
 package cellsociety;
 
-import cellsociety.model.CellConstructor;
+import cellsociety.outdatedModelPendingDeletion.CellConstructor;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
