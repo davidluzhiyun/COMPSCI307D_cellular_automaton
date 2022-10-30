@@ -63,7 +63,6 @@ public class GUI {
     bottomPanel.getStyleClass().add("large-panes");
 
     setupLeftPanel();
-    setupBottomPanel();
     setupGridPanel();
 
     // set panel dimensions
@@ -122,27 +121,26 @@ public class GUI {
 
   private void setupGridPanel() {
     // FIXME: use game options
-//         = new VBox();
 
-    gridDisplay = new GridDisplay(10, 10);
+    gridDisplay = new GridDisplay(10, 10);  //TODO Implement game settings
     gridDisplay.getGrid().setAlignment(Pos.CENTER);
 
 //        gridPanel.getStyleClass().add("large-panes");
-    gridPanel.setMinSize(properties.getGUIProperty("gridWidth"),
-        properties.getGUIProperty("gridHeight"));
 
+    // Simulation title
     Text simulationTitle = new Text("Game of Life"); //FIXME: Use game settings
     simulationTitle.setFont(Font.font("Helvetica", FontWeight.BOLD, 32));
 
-    gridPanel.getChildren().addAll(simulationTitle, gridDisplay.getGrid());
+    // Apply settings and add relevant elements
+    gridPanel.getChildren().add(gridDisplay.getGrid());
+    gridPanel.setMinSize(properties.getGUIProperty("gridWidth"),
+        properties.getGUIProperty("gridHeight"));
     StackPane.setAlignment(gridDisplay.getGrid(), Pos.CENTER);
-    gridContainer.getChildren().addAll(simulationTitle, gridPanel);
-    gridContainer.setAlignment(Pos.CENTER);
-    VBox.setMargin(simulationTitle, new Insets(20, 0, 0, 0));
-  }
 
-  private void setupBottomPanel() {
+
+    // bottom buttons
     HBox buttonContainer = new HBox();
+    buttonContainer.setAlignment(Pos.CENTER);
     PlayPauseButton playPauseBtn = new PlayPauseButton("Play/Pause", "playpause");
     SpeedSelector speedSelector = new SpeedSelector("Speed", "speed");
     StepForwardButton stepForwardButton = new StepForwardButton("Step", "step");
@@ -152,11 +150,11 @@ public class GUI {
         stepForwardButton.getButton());
     buttonContainer.setSpacing(properties.getGUIProperty("defaultElementSpacing"));
 
-    bottomPanel.getChildren().add(buttonContainer);
-    bottomPanel.setPrefSize(properties.getGUIProperty("bottomPanelWidth"),
-        properties.getGUIProperty("bottomPanelHeight"));
-    bottomPanel.setPadding(new Insets(properties.getGUIProperty("bottomPanelBorderOffset")));
-    bottomPanel.setAlignment(Pos.CENTER_RIGHT);
+
+    gridContainer.getChildren().addAll(simulationTitle, gridPanel, buttonContainer);
+    gridContainer.setAlignment(Pos.CENTER);
+    VBox.setMargin(simulationTitle, new Insets(20, 0, 0, 0));
   }
+
 
 }
