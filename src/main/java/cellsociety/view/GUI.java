@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.controller.Controller;
 import cellsociety.view.buttons.LoadFileButton;
 import cellsociety.view.buttons.SaveFileButton;
 import cellsociety.view.buttons.animation_control.PlayPauseButton;
@@ -41,9 +42,10 @@ public class GUI {
 
   public static final GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
+  private Controller controller;
+
   public GUI() {
   }
-
 
   /**
    * Set up the scene with all JFX graphics
@@ -57,6 +59,7 @@ public class GUI {
     bottomPanel = new HBox();
     leftPanel = new VBox();
     gridContainer = new VBox();
+    controller = new Controller();
 
     // style the panels
     guiWindow.getStyleClass().add("large-panes");

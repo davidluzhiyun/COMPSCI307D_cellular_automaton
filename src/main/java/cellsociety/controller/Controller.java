@@ -2,13 +2,17 @@ package cellsociety.controller;
 
 import cellsociety.alternativeModel.AbstractGameModel;
 import cellsociety.alternativeModel.Grid;
+import cellsociety.view.GUI;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.stage.Stage;
 
 public class Controller {
 
+  private Stage gameStage;
   private Properties simProperties;
   private AbstractGameModel simGameModel;
+  private GUI simGUI;
   private SimInfoParser simGameInfoParser;
   private CSVInitialGridParser simStateParser;
   private Grid initialGrid;
@@ -54,14 +58,6 @@ public class Controller {
    * Communicate a changed state from the backend in the model to the frontend grid
    */
   public void sendUpdatesToUI() {
-
-  }
-
-  /**
-   * Communiate
-   */
-
-  public void startGUIfromSplash() {
 
   }
 

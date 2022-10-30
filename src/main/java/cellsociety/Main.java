@@ -2,6 +2,8 @@ package cellsociety;
 
 
 import cellsociety.controller.CellSociety;
+import cellsociety.controller.Controller;
+import cellsociety.controller.SplashController;
 import cellsociety.view.SplashScreen;
 import java.util.ResourceBundle;
 import cellsociety.view.GUI;
@@ -15,32 +17,20 @@ public class Main extends Application {
     public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
 
     // HAVE TO FIX THIS MAKE NONSTATIC
-    public static Stage mainStage;
+    public Stage mainStage;
+
+    private SplashController splashController = new SplashController();
+
     /**
      * @see Application#start(Stage)
      */
     @Override
     public void start (Stage primaryStage) {
-        saveMainStage(primaryStage);
-        SplashScreen startupScreen = new SplashScreen();
+        splashController.saveMainStage(primaryStage);
+        SplashScreen startupScreen = new SplashScreen(splashController);
         primaryStage.setTitle(startupScreen.SPLASH_TITLE);
         primaryStage.setScene(startupScreen.createScene());
         primaryStage.show();
-
-        /* Creating a splash instead that we can use through the controller to dynamically
-        Change how the GUI works and the about sections of it depending on game choice
-        */
-
-        /*
-        GUI gui = new GUI();
-        CellSociety cellSociety = new CellSociety();
-
-        primaryStage.setScene(gui.setupScene());
-        primaryStage.setTitle("Cell Society");
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-         */
     }
 
     /**
@@ -51,16 +41,4 @@ public class Main extends Application {
         return Double.parseDouble(resources.getString("Version"));
     }
 
-    public void saveMainStage(Stage stage) {
-        this.mainStage = stage;
-    }
-
-    public static void startGUI() {
-        GUI gui = new GUI();
-        CellSociety cellSociety = new CellSociety();
-
-        mainStage.setScene(gui.setupScene());
-        mainStage.setTitle("Cell Society");
-        mainStage.show();
-    }
 }

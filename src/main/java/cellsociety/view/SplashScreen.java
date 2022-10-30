@@ -1,6 +1,8 @@
 package cellsociety.view;
 
 import cellsociety.Main;
+import cellsociety.controller.Controller;
+import cellsociety.controller.SplashController;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -25,12 +27,14 @@ import javafx.scene.text.TextAlignment;
 
 public class SplashScreen {
   public String SPLASH_TITLE;
-  protected Scene SPLASH_SCENE;
-  protected Group SPlASH_SCREEN_ROOT;
-  protected int SPLASH_SCENE_WIDTH = 800;
-  protected int SPLASH_SCENE_HEIGHT = 500;
+  private Scene SPLASH_SCENE;
+  private Group SPlASH_SCREEN_ROOT;
+  private int SPLASH_SCENE_WIDTH = 800;
+  private int SPLASH_SCENE_HEIGHT = 500;
+  private SplashController splashController;
 
-  public SplashScreen() {
+  public SplashScreen(SplashController sc) {
+    splashController = sc;
     SPlASH_SCREEN_ROOT = new Group();
     SPLASH_SCENE = new Scene(SPlASH_SCREEN_ROOT, SPLASH_SCENE_WIDTH, SPLASH_SCENE_HEIGHT);
     SPLASH_TITLE = "Simulation Options";
@@ -61,8 +65,7 @@ public class SplashScreen {
     startButton.setId("StartButton");
     startButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
 
-    // startButton.setOnAction(event -> START THE PROGRAM;
-    startButton.setOnAction(event -> Main.startGUI());
+    startButton.setOnAction(event -> splashController.startGUIfromSplash());
 
     v.getChildren().addAll(title, pickLanguageText, languageButtons,
         pickAppText, appButtons, pickStyleText,
@@ -173,12 +176,12 @@ public class SplashScreen {
     HBox styleButtons = new HBox(5);
     styleButtons.setAlignment(Pos.CENTER);
 
-    Button firstStyle = new Button("SOME UI STYLE");
+    Button firstStyle = new Button("Dark UI");
     firstStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
     //firstStyle.setOnAction(event -> );
     styleButtons.getChildren().add(firstStyle);
 
-    Button secondStyle = new Button("SOME OTHER UI STYLE");
+    Button secondStyle = new Button("Light UI");
     secondStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
     //secondStyle.setOnAction(event -> );
     styleButtons.getChildren().add(secondStyle);
