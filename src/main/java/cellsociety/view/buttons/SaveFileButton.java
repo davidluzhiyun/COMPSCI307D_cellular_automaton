@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
  */
 public class SaveFileButton extends GUIButton {
     public SaveFileButton(String btnText, String iconID) {
+
         super(btnText, iconID);
         this.setOnClickEvent(this::event);
     }

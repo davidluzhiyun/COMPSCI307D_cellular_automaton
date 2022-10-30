@@ -10,6 +10,7 @@ import static java.lang.Integer.parseInt;
  * @author dm396
  */
 public class LoadFileButton extends GUIButton {
+
     private FileChooser fileChooser;
 
     public LoadFileButton(String btnText, String iconID) {
