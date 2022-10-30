@@ -26,9 +26,6 @@ import javafx.scene.control.Alert;
 public class DataFileParser {
 
   private final File dataFile;
-  private int rows;
-  private int columns;
-
 
   public DataFileParser(File dataFile) {
     this.dataFile = dataFile;
@@ -37,7 +34,8 @@ public class DataFileParser {
   //Code for reading the CSV file from:
 // https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
 // Java code to illustrate reading a file all data at once
-  private Grid dataFileParser(String simulationFile) {
+  private Grid dataFileParser(String simulationFile)
+      throws InvocationTargetException, IllegalAccessException {
     //ADD GLOBAL CONSTANT FOR DATA FILE PATH
     List<String> simulationInformation = simFileParser(simulationFile);
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
@@ -51,7 +49,8 @@ public class DataFileParser {
     return simulationGrid;
   }
 
-  private Grid gridAssembly(Properties simulationPropertiesFile) {
+  private Grid gridAssembly(Properties simulationPropertiesFile)
+      throws InvocationTargetException, IllegalAccessException {
     try {
       simulationPropertiesFile.getProperty("InitialStates");
     } catch (Exception noInitialStates) {
@@ -76,8 +75,8 @@ public class DataFileParser {
 
     }
     //Add map of enum values
-    rows = Integer.parseInt(gridValues.get(0)[0]);
-    columns = Integer.parseInt(gridValues.get(0)[1]);
+    int rows = Integer.parseInt(gridValues.get(0)[0]);
+    int columns = Integer.parseInt(gridValues.get(0)[1]);
     DeadCell gridDefault = new DeadCell();
     Grid cellGrid = new Grid(rows, columns, gridDefault);
     gridSetup(gridValues, cellGrid, gridType, gridParameter, rows, columns);
@@ -106,8 +105,8 @@ public class DataFileParser {
     List<String> lines = new ArrayList<>();
     try (InputStream input = new FileInputStream(simFile)) {
       BufferedReader br = new BufferedReader(new InputStreamReader(input));
-      String currentLine;
-      while ((currentLine = br.readLine()) != null) {
+      String currentLine = br.readLine();
+      while ((currentLine  != null)) {
         lines.add(br.readLine());
       }
     } catch (FileNotFoundException e) {
