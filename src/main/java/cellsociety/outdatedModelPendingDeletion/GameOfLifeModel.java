@@ -1,4 +1,4 @@
-package cellsociety.model;
+package cellsociety.outdatedModelPendingDeletion;
 
 import cellsociety.Cell;
 import java.util.HashMap;
