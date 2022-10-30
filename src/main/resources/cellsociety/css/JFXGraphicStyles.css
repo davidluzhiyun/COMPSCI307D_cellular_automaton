@@ -1,9 +1,9 @@
 .button {
     -fx-background-color: #ffffff;
     -fx-background-radius: 10px;
-    -fx-pref-height: 40px;
-    -fx-pref-width: 40px;
-    -fx-border-radius: 10px;
+    -fx-pref-height: 30px;
+    -fx-pref-width: 30px;
+    -fx-border-radius: 15px;
     -fx-border-width: 2px;
     -fx-border-color: black;
 }
@@ -12,8 +12,16 @@
     -fx-background-color: #ffffff;
     -fx-background-radius: 10;
     -fx-border-color: black;
+    -fx-border-width: 0;
+}
+
+.large-panes-dark {
+    -fx-background-color: #222222;
+    -fx-background-radius: 10;
+    -fx-border-color: white;
     -fx-border-width: 1;
 }
+
 
 .grid-cell {
     -fx-background-color: #2969c0;
@@ -30,3 +38,4 @@
     -fx-border-width: 5px;
     -fx-border-color: black;
 }
+

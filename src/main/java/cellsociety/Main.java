@@ -37,6 +37,7 @@ public class Main extends Application {
 
         primaryStage.setScene(gui.setupScene());
         primaryStage.setTitle("Cell Society");
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
          */
