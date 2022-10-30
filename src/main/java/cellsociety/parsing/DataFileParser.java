@@ -3,6 +3,9 @@ package cellsociety.parsing;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
+import cellsociety.parsing.TypeSetup;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -60,8 +63,13 @@ public class DataFileParser {
     } catch (Exception noFileType) {
       System.out.println("No game type found, enter desired game type or reselect sim file.");
     }
+
     String gridFile = simulationPropertiesFile.getProperty("InitialStates");
     String gridType = simulationPropertiesFile.getProperty("Type");
+    Double gridParameter = 0.0;
+    if(simulationPropertiesFile.containsKey("Parameter")){
+      gridParameter = Double.parseDouble(simulationPropertiesFile.getProperty("Parameter"));
+    }
     List<String[]> gridValues = readAllCSVDataAtOnce(gridFile);
     //new grid
     if (gridValues.size() == 0) {
@@ -72,7 +80,7 @@ public class DataFileParser {
     columns = Integer.parseInt(gridValues.get(0)[1]);
     DeadCell gridDefault = new DeadCell();
     Grid cellGrid = new Grid(rows, columns, gridDefault);
-    gridSetup(gridValues, cellGrid, gridType, rows, columns);
+    gridSetup(gridValues, cellGrid, gridType, gridParameter, rows, columns);
     return cellGrid;
   }
 
@@ -81,18 +89,17 @@ public class DataFileParser {
    * and columns for the grid For now the default is simply a game of life grid The method would
    * take in the type and then go from there, possibly extending another method
    */
-  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type,
-      int rows, int columns) {
-    for (int r = 1; r < rows + 1; r++) {
-      for (int c = 0; c < columns; c++) {
-        int newCellType = Integer.parseInt(gridValues.get(r)[c]);
-        if (newCellType == 0) {
-          cellGrid.putCellAt(r - 1, c, new DeadCell());
-        } else if (newCellType == 1) {
-          cellGrid.putCellAt(r - 1, c, new AliveCell());
-        }
-      }
+  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type, Double gridParameter,
+      int rows, int columns) throws InvocationTargetException, IllegalAccessException {
+    TypeSetup gridReflection = new TypeSetup();
+    Method typeMethod = null;
+    try {
+      typeMethod = TypeSetup.class.getDeclaredMethod(type.toLowerCase());
+    } catch (NoSuchMethodException e) {
+      System.out.println("Invalid game type, select desired game type.");
     }
+    typeMethod.setAccessible(true);
+    typeMethod.invoke(gridReflection, gridValues,cellGrid, gridParameter, rows, columns);
   }
 
   private List<String> simFileParser(String simFile) {
