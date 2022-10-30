@@ -22,7 +22,7 @@ import javafx.scene.control.Alert;
 
 public class DataFileParser {
 
-  private File dataFile;
+  private final File dataFile;
   private int rows;
   private int columns;
 
@@ -35,13 +35,13 @@ public class DataFileParser {
 // https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
 // Java code to illustrate reading a file all data at once
   private Grid dataFileParser(String simulationFile) {
-      //ADD GLOBAL CONSTANT FOR DATA FILE PATH
+    //ADD GLOBAL CONSTANT FOR DATA FILE PATH
     List<String> simulationInformation = simFileParser(simulationFile);
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
     for (String simulationLine : simulationInformation) {
       int equalsIndex = simulationLine.indexOf("=");
       String key = simulationLine.substring(0, equalsIndex);
-      String value = simulationLine.substring(equalsIndex+1);
+      String value = simulationLine.substring(equalsIndex + 1);
       simulationPropertiesFile.setProperty(key, value);
     }
     Grid simulationGrid = gridAssembly(simulationPropertiesFile);
@@ -49,18 +49,30 @@ public class DataFileParser {
   }
 
   private Grid gridAssembly(Properties simulationPropertiesFile) {
+    try {
+      simulationPropertiesFile.getProperty("InitialStates");
+    } catch (Exception noInitialStates) {
+      System.out.println(
+          "No CSV file for cell states detected, enter desired CSV file name or reselect sim file.");
+    }
+    try {
+      simulationPropertiesFile.getProperty("Type");
+    } catch (Exception noFileType) {
+      System.out.println("No game type found, enter desired game type or reselect sim file.");
+    }
     String gridFile = simulationPropertiesFile.getProperty("InitialStates");
+    String gridType = simulationPropertiesFile.getProperty("Type");
     List<String[]> gridValues = readAllCSVDataAtOnce(gridFile);
     //new grid
-    if (gridValues == null) {
-      //Add exception for null
+    if (gridValues.size() == 0) {
+
     }
     //Add map of enum values
     rows = Integer.parseInt(gridValues.get(0)[0]);
     columns = Integer.parseInt(gridValues.get(0)[1]);
     DeadCell gridDefault = new DeadCell();
     Grid cellGrid = new Grid(rows, columns, gridDefault);
-    gridSetup(gridValues, cellGrid, type, parameters, rows, columns);
+    gridSetup(gridValues, cellGrid, gridType, rows, columns);
     return cellGrid;
   }
 
@@ -69,7 +81,7 @@ public class DataFileParser {
    * and columns for the grid For now the default is simply a game of life grid The method would
    * take in the type and then go from there, possibly extending another method
    */
-  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type, double parameters,
+  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type,
       int rows, int columns) {
     for (int r = 1; r < rows + 1; r++) {
       for (int c = 0; c < columns; c++) {
