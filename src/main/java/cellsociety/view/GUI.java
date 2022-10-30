@@ -3,7 +3,6 @@ package cellsociety.view;
 import cellsociety.view.buttons.LoadFileButton;
 import cellsociety.view.buttons.SaveFileButton;
 import cellsociety.view.buttons.animation_control.PlayPauseButton;
-import cellsociety.view.buttons.animation_control.SpeedSelector;
 import cellsociety.view.buttons.animation_control.StepForwardButton;
 import cellsociety.view.grid.GridDisplay;
 import javafx.geometry.Insets;
@@ -63,7 +62,7 @@ public class GUI {
     bottomPanel.getStyleClass().add("large-panes");
 
     setupLeftPanel();
-    setupGridPanel();
+    setupRightPanel();
 
     // set panel dimensions
     guiWindow.setPrefSize(properties.getGUIProperty("guiWidth"),
@@ -119,13 +118,11 @@ public class GUI {
 
   }
 
-  private void setupGridPanel() {
+  private void setupRightPanel() {
     // FIXME: use game options
 
     gridDisplay = new GridDisplay(10, 10);  //TODO Implement game settings
     gridDisplay.getGrid().setAlignment(Pos.CENTER);
-
-//        gridPanel.getStyleClass().add("large-panes");
 
     // Simulation title
     Text simulationTitle = new Text("Game of Life"); //FIXME: Use game settings
@@ -141,12 +138,12 @@ public class GUI {
     // bottom buttons
     HBox buttonContainer = new HBox();
     buttonContainer.setAlignment(Pos.CENTER);
+//    buttonContainer.setPadding(new Insets(properties.getGUIProperty("leftPanelBorderOffset")));
     PlayPauseButton playPauseBtn = new PlayPauseButton("Play/Pause", "playpause");
-    SpeedSelector speedSelector = new SpeedSelector("Speed", "speed");
     StepForwardButton stepForwardButton = new StepForwardButton("Step", "step");
-
+    SpeedSelector speedSelector = new SpeedSelector();
     buttonContainer.getChildren().addAll(playPauseBtn.getButton(),
-        speedSelector.getButton(),
+        speedSelector.getGraphic(),
         stepForwardButton.getButton());
     buttonContainer.setSpacing(properties.getGUIProperty("defaultElementSpacing"));
 

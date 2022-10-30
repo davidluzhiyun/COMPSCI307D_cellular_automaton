@@ -38,7 +38,7 @@ public abstract class GUIButton {
 
     // load the graphic using resources
     ResourceBundle iconResources = ResourceBundle.getBundle(GUI.GUI_ICON_PROPERTIES);
-    InputStream iconPath = LoadFileButton.class.getClassLoader().getResourceAsStream(
+    InputStream iconPath = GUIButton.class.getClassLoader().getResourceAsStream(
         iconResources.getString(iconID));
     buttonContainer = new VBox();
 
