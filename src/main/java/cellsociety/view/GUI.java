@@ -1,6 +1,7 @@
 package cellsociety.view;
 
 import cellsociety.controller.Controller;
+import cellsociety.controller.GameState;
 import cellsociety.view.buttons.LoadFileButton;
 import cellsociety.view.buttons.SaveFileButton;
 import cellsociety.view.buttons.animation_control.PlayPauseButton;
@@ -48,21 +49,23 @@ public class GUI {
   private Controller controller;
 
   // TODO: Use the game properties file instead of this information! this is merely for testing!
+  private GameState gameState;
   private final int gridDimensions = 5;
   private final String simulationTitle = "Game of Life";
   private List<List<Integer>> cellStateGrid = new ArrayList<>();
 
-  public GUI() {
+  public GUI(GameState gameState) {
+    this.gameState = gameState;
 
-    //TODO: THIS IS TEST CODE!!! IMPLEMENT REAL CODE
-    for(int i = 0; i < gridDimensions; i++){
-      cellStateGrid.add(new ArrayList<>());
-      for(int k = 0; k < gridDimensions; k++){
-        int dummyState = (i+k) % 4;
-        cellStateGrid.get(i).add(dummyState);
-        System.out.println(dummyState);
-      }
-    }
+//    //TODO: THIS IS TEST CODE!!! IMPLEMENT REAL CODE
+//    for(int i = 0; i < gridDimensions; i++){
+//      cellStateGrid.add(new ArrayList<>());
+//      for(int k = 0; k < gridDimensions; k++){
+//        int dummyState = (i+k) % 4;
+//        cellStateGrid.get(i).add(dummyState);
+//        System.out.println(dummyState);
+//      }
+//    }
   }
 
   /**
@@ -139,11 +142,11 @@ public class GUI {
 
   private void setupRightPanel() {
     // FIXME: use game options
-    gridDisplay = new GridDisplay(gridDimensions, gridDimensions);  //TODO Implement game settings
+    gridDisplay = new GridDisplay(gameState.getGridHeight(), gameState.getGridWidth());
     gridDisplay.getGrid().setAlignment(Pos.CENTER);
 
     // Simulation title
-    Text simulationTitle = new Text("Game of Life"); //FIXME: Use game settings
+    Text simulationTitle = new Text(gameState.getSimulationTitle());
     simulationTitle.setFont(Font.font("Helvetica", FontWeight.BOLD, 32));
 
     // Apply settings and add relevant elements

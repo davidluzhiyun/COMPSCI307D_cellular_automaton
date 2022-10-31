@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class GridDisplay {
 
+  private final int PLACEHOLDER_DIMENSIONS = 10;
+
   private GridPane pane;
   private int rows;
   private int cols;
@@ -19,13 +21,14 @@ public class GridDisplay {
   private int hGap;
   private int squareSize;
 
+
   private GridCellColorMap colorMap;
   private List<List<Integer>> cellStates;
   private List<List<GridCell>> cellGraphics;
 
   public GridDisplay(int rows, int cols) {
     pane = new GridPane();
-    colorMap = new GridCellColorMap(10); //FIXME: Use game parameters
+    colorMap = new GridCellColorMap();
 
     // set gap size between cells
     vGap = GUI.properties.getGUIProperty("gridCellVGap");
@@ -36,7 +39,7 @@ public class GridDisplay {
     this.rows = rows;
     this.cols = cols;
 
-    this.initializeGrid();  //TODO:
+    this.initializeGrid();
   }
 
   public void updateGridVisualization(List<List<Integer>> cellStates) {
@@ -52,15 +55,18 @@ public class GridDisplay {
     }
   }
 
+  /**
+   * Initialized grid with dummy values.
+   */
   public void initializeGrid() {
-    cellGraphics = new ArrayList<List<GridCell>>();
+    cellGraphics = new ArrayList<>();
     calculateCellDimensions();
     for (int i = 0; i < rows; i++) {
-      cellGraphics.add(new ArrayList<GridCell>());
+      cellGraphics.add(new ArrayList<>());
 
       for (int j = 0; j < cols; j++) {
         GridCell cell = new GridCell(squareSize,
-            colorMap.getColor(0)); //FIXME: colorIndex should be from model
+            colorMap.getColor(0));
         pane.add(cell.getGraphic(), i, j);
         cellGraphics.get(i).add(cell);
       }
