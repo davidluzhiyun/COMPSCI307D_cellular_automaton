@@ -2,7 +2,9 @@ package cellsociety.controller;
 
 import cellsociety.alternativeModel.AbstractGameModel;
 import cellsociety.alternativeModel.Grid;
+import cellsociety.view.FileChooser;
 import cellsociety.view.GUI;
+import java.io.File;
 import java.util.Properties;
 import java.util.ResourceBundle;
 import javafx.stage.Stage;
@@ -19,6 +21,7 @@ public class Controller {
   private ErrorChecker errorChecker;
   private ResourceBundle errorMessages;
   private static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.ControllerResources.Errors";
+  private File simFile;
 
   /**
    * Constructor for Controller, needs
@@ -36,18 +39,10 @@ public class Controller {
   /**
    * Setup the game chosen in the splash screen by the user
    */
-  public void setupGameChosen(String cellularAutomataType) {
-    simProperties.setProperty("Type", cellularAutomataType);
+  public void setUpSimProperties() {
+     simFile = FileChooser.getInstance().getDataFile();
+     simProperties = simGameInfoParser.parseSimFileProvided(String.valueOf(simFile), true);
   }
-
-  /**
-   * Set the language choice chosen by the user
-   */
-  public void setLanguageChoice(String languageChoice) {
-
-  }
-
-
 
   /**
    * Communicate a changed state from the backend in the model to the frontend grid
