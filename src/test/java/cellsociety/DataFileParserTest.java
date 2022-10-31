@@ -1,54 +1,65 @@
 package cellsociety;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import cellsociety.controller.DataFileParser;
 import java.util.Properties;
 import org.junit.jupiter.api.Test;
 
+/**
+ * These tests verify that the DataFileParser class is able to extract the information from a sim
+ * file and package it into a properties file.
+ */
+
 public class DataFileParserTest {
 
   @Test
-  void testSimFileType(){
+  void testSimFileType() {
     Properties testType = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     String test = "Fire";
-    assertTrue(testType.getProperty("Type").equals(test));
+    assertEquals(testType.getProperty("Type"), test);
   }
+
   @Test
-  void testSimFileAuthor(){
+  void testSimFileAuthor() {
     Properties testAuthor = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     String test = "Robert Duvall";
-    assertTrue(testAuthor.getProperty("Author").equals(test));
+    assertEquals(testAuthor.getProperty("Author"), test);
   }
+
   @Test
-  void testSimFileTitle(){
+  void testSimFileTitle() {
     Properties testTitle = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     String test = "Room to Burn";
-    assertTrue(testTitle.getProperty("Title").equals(test));
+    assertEquals(testTitle.getProperty("Title"), test);
   }
+
   @Test
-  void testSimFileDescription(){
+  void testSimFileDescription() {
     Properties testDescription = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     String test = "Fire in the center of the trees";
-    assertTrue(testDescription.getProperty("Description").equals(test));
+    assertEquals(testDescription.getProperty("Description"), test);
   }
+
   @Test
-  void testSimFileInitialStates(){
+  void testSimFileInitialStates() {
     Properties testInitialStates = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     String test = "fire/fire_center.csv";
-    assertTrue(testInitialStates.getProperty("InitialStates").equals(test));
+    assertEquals(testInitialStates.getProperty("InitialStates"), test);
   }
+
   @Test
-  void testSimFileParameters(){
+  void testSimFileParameters() {
     Properties testParameters = DataFileParser.parseSimFile("data/fire/fire_center.sim");
     double test = 0.4;
-    assertTrue(Double.parseDouble(testParameters.getProperty("Parameters"))==(test));
+    assertEquals(Double.parseDouble(testParameters.getProperty("Parameters")), (test));
   }
+
   @Test
-  void testSimFileStateColors(){
+  void testSimFileStateColors() {
     Properties testStateColors = DataFileParser.parseSimFile("data/fire/one_burning.sim");
     String test = "6e4d07,1f8518,cf1f13";
-    assertTrue(testStateColors.getProperty("StateColors").equals(test));
+    assertEquals(testStateColors.getProperty("StateColors"), test);
   }
 
 }

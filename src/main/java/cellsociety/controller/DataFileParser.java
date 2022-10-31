@@ -2,8 +2,6 @@ package cellsociety.controller;
 
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
@@ -16,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -23,23 +23,21 @@ import javafx.scene.control.Alert;
 
 public class DataFileParser {
 
-  private File dataFile;
-
   public DataFileParser(File dataFile) {
-  this.dataFile = dataFile;
   }
 
-  //Code for reading the CSV file from:
-// https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
-// Java code to illustrate reading a file all data at once
+  /**
+   * The method parseSimFile is used to take the information from the sim files and then package it
+   * in the form of a properties file. This allows for the information to be neatly passed around
+   * not only the DataFileParser class, but to other classes and methods outside.
+   */
 
   public static Properties parseSimFile(String simulationFile) {
-
     List<String> simulationInformation = simFileParser(simulationFile);
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
     for (String simulationLine : simulationInformation) {
       int equalsIndex = simulationLine.indexOf("=");
-      if(equalsIndex == -1){
+      if (equalsIndex == -1) {
         continue;
       }
       String key = simulationLine.substring(0, equalsIndex);
@@ -49,6 +47,32 @@ public class DataFileParser {
     return simulationPropertiesFile;
   }
 
+  /**
+   * The method simFileParser is used the get all the information from the sim file separated by
+   * line.
+   */
+  private static List<String> simFileParser(String simFile) {
+    List<String> lines = new ArrayList<>();
+    try (InputStream input = new FileInputStream(simFile)) {
+      BufferedReader br = new BufferedReader(new InputStreamReader(input));
+      String currentLine = br.readLine();
+      while ((currentLine != null)) {
+        lines.add(currentLine);
+        currentLine = br.readLine();
+      }
+    } catch (FileNotFoundException e) {
+      throw new RuntimeException(e);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    return lines;
+  }
+
+  /**
+   * The method gridAssembly is responsible for extracting all the necessary information from the
+   * properties file created from the sim file. These values are then put into the gridSetup method
+   * to then set the proper cells in the grid from the initial states.
+   */
   public Grid gridAssembly(Properties simulationPropertiesFile)
       throws InvocationTargetException, IllegalAccessException {
     try {
@@ -62,21 +86,18 @@ public class DataFileParser {
     } catch (Exception noFileType) {
       System.out.println("No game type found, enter desired game type or reselect sim file.");
     }
-
     String gridFile = simulationPropertiesFile.getProperty("InitialStates");
     String gridType = simulationPropertiesFile.getProperty("Type");
     Double gridParameter = 0.0;
-    if(simulationPropertiesFile.containsKey("Parameter")){
+    if (simulationPropertiesFile.containsKey("Parameter")) {
       gridParameter = Double.parseDouble(simulationPropertiesFile.getProperty("Parameter"));
     }
     List<String[]> gridValues = readAllCSVDataAtOnce(gridFile);
-    //new grid
     if (gridValues.size() == 0) {
-
+      System.out.println("No initial state values found within the CSV file.");
     }
-    //Add map of enum values
-    int rows = Integer.parseInt(gridValues.get(0)[0]);
-    int columns = Integer.parseInt(gridValues.get(0)[1]);
+    int rows = Integer.parseInt(gridValues.get(0)[1]);
+    int columns = Integer.parseInt(gridValues.get(0)[0]);
     DeadCell gridDefault = new DeadCell();
     Grid cellGrid = new Grid(rows, columns, gridDefault);
     gridSetup(gridValues, cellGrid, gridType, gridParameter, rows, columns);
@@ -84,12 +105,15 @@ public class DataFileParser {
   }
 
   /**
-   * Implement the different systems that will use the additional parameters besides just the rows
-   * and columns for the grid For now the default is simply a game of life grid The method would
-   * take in the type and then go from there, possibly extending another method
+   * The method below is responsible for taking in the information from the sim file and the CSV
+   * file to set up the grid for the model. Specifically, making sure that the grid set up method
+   * from the TypeSetup class matches that of the type given in the sim file to be able to
+   * accurately determine what the values present in the CSV file mean in terms of what kinds of
+   * cells should be placed inside the grid.
    */
-  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type, Double gridParameter,
-      int rows, int columns) throws InvocationTargetException, IllegalAccessException {
+  private void gridSetup(List<String[]> gridValues, Grid cellGrid, String type,
+      Double gridParameter, int rows, int columns)
+      throws InvocationTargetException, IllegalAccessException {
     TypeSetup gridReflection = new TypeSetup();
     Method typeMethod = null;
     try {
@@ -98,26 +122,16 @@ public class DataFileParser {
       System.out.println("Invalid game type, select desired game type.");
     }
     typeMethod.setAccessible(true);
-    typeMethod.invoke(gridReflection, gridValues,cellGrid, gridParameter, rows, columns);
+    typeMethod.invoke(gridReflection, gridValues, cellGrid, gridParameter, rows, columns);
   }
 
-  private static List<String> simFileParser(String simFile) {
-    List<String> lines = new ArrayList<>();
-    try (InputStream input = new FileInputStream(simFile)) {
-      BufferedReader br = new BufferedReader(new InputStreamReader(input));
-      String currentLine = br.readLine();
-      while ((currentLine  != null)) {
-        lines.add(currentLine);
-        currentLine = br.readLine();
-      }
-    } catch (FileNotFoundException e) {
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-    return lines;
-  }
-
+  /**
+   * The method below reads all the CSV data from the given string that corresponds to the file
+   * path. The string arrays are the rows, while the indices within the arrays are the column
+   * locations. Code for reading the CSV file from:
+   * https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/ Section: Java code to
+   * illustrate reading a file all data at once
+   */
   public List<String[]> readAllCSVDataAtOnce(String file) {
     List<String[]> allData = null;
     try {
@@ -129,7 +143,8 @@ public class DataFileParser {
       CSVReader csvReader = new CSVReaderBuilder(filereader).build();
       allData = csvReader.readAll();
     } catch (Exception e) {
-      e.printStackTrace();
+      System.out.println(
+          "Invalid CSV file, please double check the sim file or select CSV file manually.");
     }
     return allData;
   }
@@ -160,7 +175,7 @@ public class DataFileParser {
     }
   }
 
-  // display given message to user using the given type of Alert dialog box
+  // Display given message to user using the given type of Alert dialog box
   private void showMessage(Alert.AlertType type, String message) {
     new Alert(type, message).showAndWait();
   }
