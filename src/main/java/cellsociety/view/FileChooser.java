@@ -13,11 +13,11 @@ public class FileChooser {
 
   private static FileChooser instance = null;
 
-  public static final String DATA_FILE_CSV_EXTENSION = "*.csv";
+  public static final String DATA_FILE_SIM_EXTENSION = "*.sim";
   // default to start in the data folder to make it easy on the user to find
   public static final String DATA_FILE_FOLDER = System.getProperty("user.dir") + "/data";
   // NOTE: make ONE chooser since generally accepted behavior is that it remembers where user left it last
-  private final static javafx.stage.FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_CSV_EXTENSION);
+  private final static javafx.stage.FileChooser FILE_CHOOSER = makeChooser(DATA_FILE_SIM_EXTENSION);
   // internal configuration file
 
   private File dataFile;
@@ -44,7 +44,8 @@ public class FileChooser {
    */
   public File getDataFile() {
     if (this.dataFile == null) {
-      throw new RuntimeException("Data file not selected!");
+      promptFileChooser();
+//      throw new RuntimeException("Data file not selected!");
     }
     return this.dataFile;
   }
