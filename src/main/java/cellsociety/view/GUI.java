@@ -7,8 +7,6 @@ import cellsociety.view.buttons.SaveFileButton;
 import cellsociety.view.buttons.animation_control.PlayPauseButton;
 import cellsociety.view.buttons.animation_control.StepForwardButton;
 import cellsociety.view.grid.GridDisplay;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -47,25 +45,10 @@ public class GUI {
   public static final GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
   private Controller controller;
-
-  // TODO: Use the game properties file instead of this information! this is merely for testing!
   private GameState gameState;
-  private final int gridDimensions = 5;
-  private final String simulationTitle = "Game of Life";
-  private List<List<Integer>> cellStateGrid = new ArrayList<>();
 
   public GUI(GameState gameState) {
     this.gameState = gameState;
-
-//    //TODO: THIS IS TEST CODE!!! IMPLEMENT REAL CODE
-//    for(int i = 0; i < gridDimensions; i++){
-//      cellStateGrid.add(new ArrayList<>());
-//      for(int k = 0; k < gridDimensions; k++){
-//        int dummyState = (i+k) % 4;
-//        cellStateGrid.get(i).add(dummyState);
-//        System.out.println(dummyState);
-//      }
-//    }
   }
 
   /**
@@ -79,7 +62,6 @@ public class GUI {
     gridPanel = new StackPane();
     leftPanel = new VBox();
     gridContainer = new VBox();
-//    controller = new Controller();
 
     // style the panels
     guiWindow.getStyleClass().add("large-panes");
@@ -134,11 +116,10 @@ public class GUI {
     leftPanel.setSpacing(properties.getGUIProperty("leftPanelVertSpacing"));
     leftPanel.setPadding(new Insets(properties.getGUIProperty("leftPanelBorderOffset")));
     leftPanel.getChildren().addAll(buttonContainer, info.getGraphic());
-    VBox.setMargin(buttonContainer, new Insets(70, 0, 0, 0)); //FIXME: Use resources
+    VBox.setMargin(buttonContainer, new Insets(70, 0, 0, 0));
   }
 
   private void setupRightPanel() {
-    // FIXME: use game options
     gridDisplay = new GridDisplay(gameState.getGridHeight(), gameState.getGridWidth());
     gridDisplay.getGrid().setAlignment(Pos.CENTER);
 
@@ -159,12 +140,12 @@ public class GUI {
     StepForwardButton stepForwardButton = new StepForwardButton("Step", "step");
     SpeedSelector speedSelector = new SpeedSelector();
     buttonContainer.getChildren().addAll(playPauseBtn.getButton(),
-        speedSelector.getGraphic(),
-        stepForwardButton.getButton());
+        stepForwardButton.getButton(),
+        speedSelector.getGraphic());
     buttonContainer.setSpacing(properties.getGUIProperty("defaultElementSpacing"));
 
     gridContainer.getChildren().addAll(simulationTitle, gridPanel, buttonContainer);
     gridContainer.setAlignment(Pos.CENTER);
-    VBox.setMargin(simulationTitle, new Insets(20, 0, 0, 0)); // FIXME: Use resources
+    VBox.setMargin(simulationTitle, new Insets(20, 0, 0, 0));
   }
 }
