@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.controller.Controller;
 import javafx.scene.text.Text;
 
 public class SimInformationDisplay {
@@ -17,4 +18,5 @@ public class SimInformationDisplay {
   public Text getGraphic() {
     return text;
   }
+
 }

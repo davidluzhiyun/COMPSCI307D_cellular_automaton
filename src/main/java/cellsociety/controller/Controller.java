@@ -4,6 +4,7 @@ import cellsociety.alternativeModel.AbstractGameModel;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.view.FileChooser;
 import cellsociety.view.GUI;
+import cellsociety.view.SimInformationDisplay;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Controller {
   public List<List<Integer>> initialCellStateGrid = new ArrayList<>();
   public Properties simProperties;
   private GameState gameState;
+  private SimInformationDisplay simInfoDisplay;
   private AbstractGameModel simGameModel;
   private GUI simGUI;
   private SimInfoParser simGameInfoParser;
@@ -46,6 +48,9 @@ public class Controller {
     simProperties = new Properties();
     setUpAllGameProperties();
     gameState = new GameState(this);
+    simInfoDisplay = new SimInformationDisplay((String) simProperties.get("Type"),
+        (String) simProperties.get("Title"), (String) simProperties.get("Author"),
+        (String) simProperties.get("Description"));
     simGUI = new GUI(gameState);
     errorChecker = new ErrorChecker();
     errorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);

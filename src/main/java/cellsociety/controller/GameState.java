@@ -41,16 +41,15 @@ public class GameState {
     return controller.findGridWidth();
   }
 
-
   public String getGameAuthor() {
-    return gameAuthor;
+    return (String) controller.simProperties.get("Author");
   }
 
   public String getGameDescription() {
-    return gameDescription;
+    return (String) controller.simProperties.get("Description");
   }
 
   public String getGameType() {
-    return gameType;
+    return (String) controller.simProperties.get("Type");
   }
 }
