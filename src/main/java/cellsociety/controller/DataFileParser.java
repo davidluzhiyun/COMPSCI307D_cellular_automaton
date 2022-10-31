@@ -33,7 +33,6 @@ public class DataFileParser {
 // https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
 // Java code to illustrate reading a file all data at once
   public static Properties dataFileParser(String simulationFile) {
-    //ADD GLOBAL CONSTANT FOR DATA FILE PATH
     List<String> simulationInformation = simFileParser(simulationFile);
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
     for (String simulationLine : simulationInformation) {
