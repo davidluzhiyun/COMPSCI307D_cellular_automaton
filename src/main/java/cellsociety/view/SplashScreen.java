@@ -106,19 +106,19 @@ public class SplashScreen {
 
     Button engButton = new Button("ENGLISH");
     engButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //engButton.setOnAction(event -> );
+    engButton.setOnAction(event -> splashController.setLangChosen("English"));
     engButton.setId("EnglishButton");
     languageButtons.getChildren().add(engButton);
 
-    Button frButton = new Button("FRENCH");
-    frButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //frButton.setOnAction(event -> );
-    frButton.setId("FrenchButton");
-    languageButtons.getChildren().add(frButton);
+    Button spButton = new Button("SPANISH");
+    spButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
+    spButton.setOnAction(event -> splashController.setLangChosen("Spanish"));
+    spButton.setId("FrenchButton");
+    languageButtons.getChildren().add(spButton);
 
     Button gerButton = new Button("GERMAN");
     gerButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //gerButton.setOnAction(event -> );
+    gerButton.setOnAction(event -> splashController.setLangChosen("German"));
     gerButton.setId("GermanButton");
     languageButtons.getChildren().add(gerButton);
 
@@ -178,12 +178,12 @@ public class SplashScreen {
 
     Button firstStyle = new Button("Dark UI");
     firstStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //firstStyle.setOnAction(event -> );
+    firstStyle.setOnAction(event -> splashController.setUIStyling("DarkTheme.css"));
     styleButtons.getChildren().add(firstStyle);
 
-    Button secondStyle = new Button("Light UI");
+    Button secondStyle = new Button("LightTheme");
     secondStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //secondStyle.setOnAction(event -> );
+    secondStyle.setOnAction(event -> splashController.setUIStyling("LightTheme.css"));
     styleButtons.getChildren().add(secondStyle);
 
     return styleButtons;

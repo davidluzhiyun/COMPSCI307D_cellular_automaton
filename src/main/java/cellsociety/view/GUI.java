@@ -29,8 +29,11 @@ public class GUI {
 
   // Properties
   public static final String GUI_ICON_PROPERTIES = "cellsociety.properties.GUIIcons";
+
   // Style guides
-  private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/JFXGraphicStyles.css";
+  public String buttonStyleguideResource = "/cellsociety/css/LightTheme.css";
+  public String languagePropsPath = "/cellsociety/ControllerResources/English.properties";
+
 
   // Set of panels that organizes GUI elements
   private BorderPane guiWindow;
@@ -81,7 +84,7 @@ public class GUI {
     Scene scene = new Scene(guiWindow, properties.getGUIProperty("guiWidth"),
         properties.getGUIProperty("guiHeight"));
     try {
-      scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
+      scene.getStylesheets().add(getClass().getResource(buttonStyleguideResource).toString());
     } catch (NullPointerException e) {
       throw new NullPointerException("Resource styleguide not found.");
     }

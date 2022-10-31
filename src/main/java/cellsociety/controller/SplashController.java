@@ -29,11 +29,11 @@ public class SplashController {
   }
 
   public void setUIStyling(String s) {
-
+    gui.buttonStyleguideResource = "/cellsociety/css/" + s;
   }
 
   public void setLangChosen(String s) {
-
+    gui.languagePropsPath = "/cellsociety/ControllerResources/" + s + ".properties";
   }
 
 }
