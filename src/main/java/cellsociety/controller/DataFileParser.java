@@ -3,7 +3,6 @@ package cellsociety.controller;
 import cellsociety.alternativeModel.Grid;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
-import cellsociety.parsing.TypeSetup;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import com.opencsv.CSVReader;
