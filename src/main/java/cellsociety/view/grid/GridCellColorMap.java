@@ -17,13 +17,9 @@ public class GridCellColorMap {
   private Map<Integer, Color> colorMap;
   private static final int MAX_STATES = 10;
 
-  public GridCellColorMap(int numberOfStates) {
-    if (numberOfStates > MAX_STATES) {
-      throw new RuntimeException("Only 10 states allowed per simulation.");
-    }
-
+  public GridCellColorMap() {
     colorMap = new HashMap<>();
-    for (int colorIndex = 0; colorIndex < numberOfStates; colorIndex++) {
+    for (int colorIndex = 0; colorIndex < MAX_STATES; colorIndex++) {
       String color = GUI.properties.getColorProperty(colorIndex);
       colorMap.put(colorIndex, Color.web(color));
 //            System.out.println(colorIndex + " " + color); //TODO: use this in your testing!
