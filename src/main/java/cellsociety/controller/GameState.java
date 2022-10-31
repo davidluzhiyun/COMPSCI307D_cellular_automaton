@@ -20,9 +20,15 @@ public class GameState {
     return controller.simProperties.getProperty("Type") + ": " + controller.simProperties.getProperty("Title");
   }
 
+  public void setCellStateGrid(List<List<Integer>> stateGrid) {
+    this.cellStateGrid = stateGrid;
+  }
+
+  /*
   public List<List<Integer>> getCellStateGrid(){
     return controller.makeInitialGridDisplayStatesFromStateList();
   }
+   */
 
   public int getGridHeight() {
     return controller.findGridHeight();
