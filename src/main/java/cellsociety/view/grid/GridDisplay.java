@@ -47,7 +47,7 @@ public class GridDisplay {
       for (int j = 0; j < cols; j++) {
         GridCell cell = cellGraphics.get(i).get(j);
         int state = cellStates.get(i).get(j);
-        cell.getGraphic().setFill(colorMap.getColor(0));    //FIXME: colorIndex should be from state
+        cell.getGraphic().setFill(colorMap.getColor(state));    //FIXME: colorIndex should be from state
       }
     }
   }
