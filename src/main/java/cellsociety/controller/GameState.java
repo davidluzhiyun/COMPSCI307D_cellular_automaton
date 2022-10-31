@@ -8,24 +8,27 @@ public class GameState {
   private int gridWidth;
   private String simulationTitle;
   private List<List<Integer>> cellStateGrid = new ArrayList<>();
+  private Controller controller;
 
   public GameState(int gridHeight, int gridWidth, String simulationTitle){
-
+    gridHeight = getGridHeight();
+    gridWidth = getGridWidth();
+    simulationTitle = getSimulationTitle();
   }
 
   public String getSimulationTitle(){
-    return simulationTitle;
+    return controller.simProperties.getProperty("Type") + ": " + controller.simProperties.getProperty("Title");
   }
 
   public List<List<Integer>> getCellStateGrid(){
-    return cellStateGrid;
+    return controller.makeInitialGridDisplayStatesFromStateList();
   }
 
   public int getGridHeight() {
-    return gridHeight;
+    return controller.findGridHeight();
   }
 
   public int getGridWidth() {
-    return gridWidth;
+    return controller.findGridWidth();
   }
 }
