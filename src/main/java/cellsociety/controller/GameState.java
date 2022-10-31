@@ -7,6 +7,10 @@ public class GameState {
   private int gridHeight;
   private int gridWidth;
   private String simulationTitle;
+  private String gameType;
+  private String gameAuthor;
+  private String gameDescription;
+
   private List<List<Integer>> cellStateGrid = new ArrayList<>();
   private Controller controller;
 
@@ -35,5 +39,18 @@ public class GameState {
 
   public int getGridWidth() {
     return controller.findGridWidth();
+  }
+
+
+  public String getGameAuthor() {
+    return gameAuthor;
+  }
+
+  public String getGameDescription() {
+    return gameDescription;
+  }
+
+  public String getGameType() {
+    return gameType;
   }
 }
