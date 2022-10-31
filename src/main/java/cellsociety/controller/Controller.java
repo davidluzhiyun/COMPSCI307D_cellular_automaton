@@ -28,7 +28,7 @@ public class Controller {
   public Controller() {
     simGameInfoParser = new SimInfoParser();
     simProperties = new Properties();
-
+    simGUI = new GUI();
     errorChecker = new ErrorChecker();
     errorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
   }
@@ -47,12 +47,7 @@ public class Controller {
 
   }
 
-  /**
-   * Set the UI styling chosen properly
-   */
-  public void setUserInterfaceStyling() {
 
-  }
 
   /**
    * Communicate a changed state from the backend in the model to the frontend grid

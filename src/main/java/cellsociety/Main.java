@@ -15,10 +15,6 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     public static final String INTERNAL_CONFIGURATION = "cellsociety.Configuration";
-
-    // HAVE TO FIX THIS MAKE NONSTATIC
-    public Stage mainStage;
-
     private SplashController splashController = new SplashController();
 
     /**

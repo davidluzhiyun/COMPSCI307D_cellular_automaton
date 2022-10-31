@@ -1,3 +1,29 @@
+.root {
+  -fx-font-size: 9pt;
+  -fx-font-family: "Courier New";
+  -fx-base: black;
+  -fx-background: rgb(240, 248, 250);
+}
+
+.label {
+  -fx-font-size: 9pt;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-text-fill: #006464;
+  -fx-opacity: 0.6;
+}
+
+.combo-box-base {
+  -fx-text-base-color: #006464;
+  -fx-background-color: #DFB951;
+  -fx-border-radius: 20;
+  -fx-background-radius: 20;
+}
+.combo-box-base:hover {
+  -fx-background-color: #3a3a3a;
+}
+
+
+
 .button {
   -fx-background-color: #ffffff;
   -fx-background-radius: 10px;

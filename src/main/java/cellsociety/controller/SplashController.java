@@ -11,10 +11,9 @@ public class SplashController {
   private Scene simScene;
   private ResourceBundle rb;
   private Stage mainStage;
-  private GUI gui;
+  private GUI gui = new GUI();
 
   public void startGUIfromSplash() {
-    gui = new GUI();
     mainStage.setScene(gui.setupScene());
     mainStage.setTitle("Cell Society");
     mainStage.show();
@@ -28,10 +27,18 @@ public class SplashController {
     this.simScene = scene;
   }
 
+  /**
+   * Sets the proper UI styling desired
+   * @param s, String denoting which type of styling to use
+   */
   public void setUIStyling(String s) {
     gui.buttonStyleguideResource = "/cellsociety/css/" + s;
   }
 
+  /**
+   * Sets the proper language desired
+   * @param s, String denoting which langugae file to pick from resources
+   */
   public void setLangChosen(String s) {
     gui.languagePropsPath = "/cellsociety/ControllerResources/" + s + ".properties";
   }

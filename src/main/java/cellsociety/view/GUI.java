@@ -26,7 +26,6 @@ import javafx.scene.text.Text;
  */
 public class GUI {
 
-
   // Properties
   public static final String GUI_ICON_PROPERTIES = "cellsociety.properties.GUIIcons";
 
