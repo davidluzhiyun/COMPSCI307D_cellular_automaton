@@ -124,11 +124,8 @@ public class GUI {
     SaveFileButton saveFileBtn = new SaveFileButton("Save File", "saveFileIconPath");
 
     // TODO: implement simulation info class
-    SimInformationDisplay info = new SimInformationDisplay("""
-        Simulation type:\tnull
-        Author:\tnull
-        Other info:\tnull
-        """);
+    SimInformationDisplay info = new SimInformationDisplay(gameState.getGameType(),
+        gameState.getSimulationTitle(), gameState.getGameAuthor(), gameState.getGameDescription());
 
     // add all elements to panel group
     buttonContainer.getChildren().addAll(loadFileButton.getButton(),
