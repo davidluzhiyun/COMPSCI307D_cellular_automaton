@@ -38,6 +38,9 @@ public class DataFileParser {
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
     for (String simulationLine : simulationInformation) {
       int equalsIndex = simulationLine.indexOf("=");
+      if(equalsIndex == -1){
+        continue;
+      }
       String key = simulationLine.substring(0, equalsIndex);
       String value = simulationLine.substring(equalsIndex + 1);
       simulationPropertiesFile.setProperty(key, value);
