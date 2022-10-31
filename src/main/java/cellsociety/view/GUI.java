@@ -79,7 +79,7 @@ public class GUI {
     gridPanel = new StackPane();
     leftPanel = new VBox();
     gridContainer = new VBox();
-    controller = new Controller();
+//    controller = new Controller();
 
     // style the panels
     guiWindow.getStyleClass().add("large-panes");
@@ -104,7 +104,7 @@ public class GUI {
       throw new NullPointerException("Resource styleguide not found.");
     }
 
-    gridDisplay.updateGridVisualization(this.cellStateGrid);
+//    gridDisplay.updateGridVisualization(this.cellStateGrid);
     return scene;
   }
 

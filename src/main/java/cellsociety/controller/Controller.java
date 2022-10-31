@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Controller {
@@ -17,6 +18,7 @@ public class Controller {
   public List<String[]> initialStateList;
   public List<List<Integer>> initialCellStateGrid = new ArrayList<>();
   public Properties simProperties;
+  private GameState gameState;
   private AbstractGameModel simGameModel;
   private GUI simGUI;
   private SimInfoParser simGameInfoParser;
@@ -39,17 +41,28 @@ public class Controller {
   public Controller() {
     simGameInfoParser = new SimInfoParser();
     dataFileParser = new DataFileParser(FileChooser.getInstance().getDataFile());
+    simFile = FileChooser.getInstance().getDataFile();
+    setUpAllGameProperties();
     simProperties = new Properties();
-    simGUI = new GUI();
+    gameState = new GameState(this);
+    simGUI = new GUI(gameState);
     errorChecker = new ErrorChecker();
     errorMessages = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
+  }
+
+  public Scene startGUI(){
+    return this.simGUI.setupScene();
+  }
+
+  public GUI getSimGUI(){
+    return simGUI;
   }
 
   /**
    * Set up properties file with all information
    */
   public void setUpAllGameProperties() {
-     simProperties = dataFileParser.parseSimFile(String.valueOf(simFile));
+     simProperties = simGameInfoParser.parseSimFileProvided(simFile.getAbsolutePath(), false);// dataFileParser.parseSimFile(simFile.getAbsolutePath());
      initialStateList = dataFileParser.readAllCSVDataAtOnce("data/" + simProperties.getProperty("InitialStates"));
      gridHeight = Integer.parseInt(initialStateList.get(0)[1]);
      gridWidth = Integer.parseInt(initialStateList.get(0)[0]);

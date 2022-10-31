@@ -10,10 +10,11 @@ public class GameState {
   private List<List<Integer>> cellStateGrid = new ArrayList<>();
   private Controller controller;
 
-  public GameState(int gridHeight, int gridWidth, String simulationTitle){
-    gridHeight = getGridHeight();
-    gridWidth = getGridWidth();
-    simulationTitle = getSimulationTitle();
+  public GameState(Controller controller){
+    this.controller = controller;
+    this.gridHeight = getGridHeight();
+    this.gridWidth = getGridWidth();
+    this.simulationTitle = getSimulationTitle();
   }
 
   public String getSimulationTitle(){
@@ -23,12 +24,6 @@ public class GameState {
   public void setCellStateGrid(List<List<Integer>> stateGrid) {
     this.cellStateGrid = stateGrid;
   }
-
-  /*
-  public List<List<Integer>> getCellStateGrid(){
-    return controller.makeInitialGridDisplayStatesFromStateList();
-  }
-   */
 
   public int getGridHeight() {
     return controller.findGridHeight();
