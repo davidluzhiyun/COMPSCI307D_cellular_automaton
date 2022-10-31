@@ -28,5 +28,13 @@ public class SplashController {
     this.simScene = scene;
   }
 
+  public void setUIStyling(String s) {
+
+  }
+
+  public void setLangChosen(String s) {
+
+  }
+
 }
 
