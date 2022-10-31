@@ -1,9 +1,7 @@
 package cellsociety.controller;
 
 import cellsociety.alternativeModel.Grid;
-import cellsociety.alternativeModel.cell.gameOfLifeCells.AliveCell;
 import cellsociety.alternativeModel.cell.gameOfLifeCells.DeadCell;
-import cellsociety.parsing.TypeSetup;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import com.opencsv.CSVReader;
@@ -25,17 +23,16 @@ import javafx.scene.control.Alert;
 
 public class DataFileParser {
 
-  private final File dataFile;
+  private File dataFile;
 
   public DataFileParser(File dataFile) {
-    this.dataFile = dataFile;
+  this.dataFile = dataFile;
   }
 
   //Code for reading the CSV file from:
 // https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/
 // Java code to illustrate reading a file all data at once
-  private Grid dataFileParser(String simulationFile)
-      throws InvocationTargetException, IllegalAccessException {
+  public static Properties dataFileParser(String simulationFile) {
     //ADD GLOBAL CONSTANT FOR DATA FILE PATH
     List<String> simulationInformation = simFileParser(simulationFile);
     Properties simulationPropertiesFile = new Properties(simulationInformation.size());
@@ -45,11 +42,10 @@ public class DataFileParser {
       String value = simulationLine.substring(equalsIndex + 1);
       simulationPropertiesFile.setProperty(key, value);
     }
-    Grid simulationGrid = gridAssembly(simulationPropertiesFile);
-    return simulationGrid;
+    return simulationPropertiesFile;
   }
 
-  private Grid gridAssembly(Properties simulationPropertiesFile)
+  public Grid gridAssembly(Properties simulationPropertiesFile)
       throws InvocationTargetException, IllegalAccessException {
     try {
       simulationPropertiesFile.getProperty("InitialStates");
@@ -101,13 +97,14 @@ public class DataFileParser {
     typeMethod.invoke(gridReflection, gridValues,cellGrid, gridParameter, rows, columns);
   }
 
-  private List<String> simFileParser(String simFile) {
+  private static List<String> simFileParser(String simFile) {
     List<String> lines = new ArrayList<>();
     try (InputStream input = new FileInputStream(simFile)) {
       BufferedReader br = new BufferedReader(new InputStreamReader(input));
       String currentLine = br.readLine();
       while ((currentLine  != null)) {
-        lines.add(br.readLine());
+        lines.add(currentLine);
+        currentLine = br.readLine();
       }
     } catch (FileNotFoundException e) {
       throw new RuntimeException(e);
