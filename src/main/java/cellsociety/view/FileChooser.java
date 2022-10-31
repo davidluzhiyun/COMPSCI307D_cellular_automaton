@@ -23,7 +23,6 @@ public class FileChooser {
   private File dataFile;
 
   private FileChooser() {
-    //TODO: Implement as singleton? We should only have one instance at a time.
   }
 
   public static FileChooser getInstance() {
@@ -38,18 +37,6 @@ public class FileChooser {
    */
   public void promptFileChooser() {
     this.dataFile = FILE_CHOOSER.showOpenDialog(new Stage());
-//
-//        try {
-//            this.dataFile = FILE_CHOOSER.showOpenDialog(new Stage());
-//            if (dataFile != null) {
-//                int sum = sumCSVData(new FileReader(dataFile));
-//                showMessage(AlertType.INFORMATION, "" + sum);
-//            }
-//        }
-//        catch (IOException e) {
-//            // should never happen since user selected the file
-//            showMessage(AlertType.ERROR, "Invalid Data File Given");
-//        }
   }
 
   /**
