@@ -132,7 +132,7 @@ public class DataFileParser {
    * https://www.geeksforgeeks.org/reading-csv-file-java-using-opencsv/ Section: Java code to
    * illustrate reading a file all data at once
    */
-  public List<String[]> readAllCSVDataAtOnce(String file) {
+  public static List<String[]> readAllCSVDataAtOnce(String file) {
     List<String[]> allData = null;
     try {
       // Create an object of file reader

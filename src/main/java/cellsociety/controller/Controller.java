@@ -107,7 +107,4 @@ public class Controller {
     return initialCellStateGrid;
   }
 
-  /**
-   * Communicate a changed state from the backend in the model to the frontend grid
-   */
 }
