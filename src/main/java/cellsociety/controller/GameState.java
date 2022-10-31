@@ -18,7 +18,7 @@ public class GameState {
   }
 
   public String getSimulationTitle(){
-    return controller.simProperties.getProperty("Type") + ": " + controller.simProperties.getProperty("Title");
+    return controller.simProperties.get("Type") + ": " + controller.simProperties.get("Title");
   }
 
   public void setCellStateGrid(List<List<Integer>> stateGrid) {

@@ -36,5 +36,4 @@ public class Main extends Application {
         ResourceBundle resources = ResourceBundle.getBundle(INTERNAL_CONFIGURATION);
         return Double.parseDouble(resources.getString("Version"));
     }
-
 }

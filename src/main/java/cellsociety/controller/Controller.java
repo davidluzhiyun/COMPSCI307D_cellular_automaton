@@ -42,8 +42,9 @@ public class Controller {
     simGameInfoParser = new SimInfoParser();
     dataFileParser = new DataFileParser(FileChooser.getInstance().getDataFile());
     simFile = FileChooser.getInstance().getDataFile();
-    setUpAllGameProperties();
+    initialStateList = new ArrayList<>();
     simProperties = new Properties();
+    setUpAllGameProperties();
     gameState = new GameState(this);
     simGUI = new GUI(gameState);
     errorChecker = new ErrorChecker();
@@ -62,7 +63,7 @@ public class Controller {
    * Set up properties file with all information
    */
   public void setUpAllGameProperties() {
-     simProperties = simGameInfoParser.parseSimFileProvided(simFile.getAbsolutePath(), false);// dataFileParser.parseSimFile(simFile.getAbsolutePath());
+     simProperties = dataFileParser.parseSimFile(simFile.getAbsolutePath());
      initialStateList = dataFileParser.readAllCSVDataAtOnce("data/" + simProperties.getProperty("InitialStates"));
      gridHeight = Integer.parseInt(initialStateList.get(0)[1]);
      gridWidth = Integer.parseInt(initialStateList.get(0)[0]);

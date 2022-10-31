@@ -1,6 +1,7 @@
 package cellsociety.controller;
 
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +10,7 @@ import java.util.Properties;
 
 public class SimInfoParser implements SimInfoProps {
 
-  private static final List<String> REQUIRED_GAME_INFO = List.of("Type", "Author",
-      "Description", "InitialStates", "Title");
+  private static final List<String> REQUIRED_GAME_INFO = List.of("Type", "Author", "Description", "InitialStates", "Title");
 
 
   public Properties parseSimFileProvided(String fileName, Boolean checkRequiredInfo) {
