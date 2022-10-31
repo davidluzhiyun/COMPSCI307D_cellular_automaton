@@ -104,7 +104,7 @@ public class GUI {
       throw new NullPointerException("Resource styleguide not found.");
     }
 
-//    gridDisplay.updateGridVisualization(this.cellStateGrid);
+    gridDisplay.updateGridVisualization(gameState.getCellStateGrid());
     return scene;
   }
 

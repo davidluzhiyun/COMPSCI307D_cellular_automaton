@@ -44,7 +44,6 @@ public class GridDisplay {
 
   public void updateGridVisualization(List<List<Integer>> cellStates) {
     if (cellStates.size() != rows || cellStates.get(0).size() != cols) {
-//      System.out.println("");
       throw new RuntimeException("Updated cell state dimensions do not match!");
     }
     for (int i = 0; i < rows; i++) {

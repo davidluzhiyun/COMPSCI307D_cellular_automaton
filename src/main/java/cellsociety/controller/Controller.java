@@ -52,6 +52,7 @@ public class Controller {
   }
 
   public Scene startGUI(){
+    gameState.setCellStateGrid(makeInitialGridDisplayStatesFromStateList());
     return this.simGUI.setupScene();
   }
 
@@ -90,14 +91,14 @@ public class Controller {
    * @return List of Lists of integers representing the state grid to be used in frontend
    */
   public List<List<Integer>> makeInitialGridDisplayStatesFromStateList() {
-    List<Integer> tempList = new ArrayList<>();
     for (int i=1; i < initialStateList.size(); i++) {
-      for (int j=0; j < initialStateList.get(i).length; j++)
+      List<Integer> tempList = new ArrayList<>();
+      for (int j = 0; j < initialStateList.get(i).length; j++){
         tempList.add(Integer.parseInt(initialStateList.get(i)[j]));
-
+      }
       initialCellStateGrid.add(tempList);
-      tempList.clear();
     }
+
     return initialCellStateGrid;
   }
 
