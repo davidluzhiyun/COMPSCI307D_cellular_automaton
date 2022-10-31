@@ -16,7 +16,7 @@ public class Controller {
   private Stage gameStage;
   public List<String[]> initialStateList;
   public List<List<Integer>> initialCellStateGrid = new ArrayList<>();
-  private Properties simProperties;
+  public Properties simProperties;
   private AbstractGameModel simGameModel;
   private GUI simGUI;
   private SimInfoParser simGameInfoParser;
