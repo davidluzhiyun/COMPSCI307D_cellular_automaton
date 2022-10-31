@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
@@ -45,15 +46,15 @@ public class SpeedSelector {
     comboBox = new ComboBox<>(SPEED_OPTIONS);
     comboBox.setValue(1.0);
     label = new Text("Simulation Speed");
-
+    label.setFont(Font.font("Helvetica"));
 
     // set icon graphic appearances
     if (iconPath == null) {
       throw new NullPointerException("Invalid button icon path");
     }
     icon = new ImageView(new Image(iconPath));
-    icon.setFitHeight(iconHeight);  //TODO: Use resources
-    icon.setFitWidth(iconWidth);   //TODO: Use resources
+    icon.setFitHeight(iconHeight);
+    icon.setFitWidth(iconWidth);
   }
 
   public void setAction(EventHandler<ActionEvent> event){

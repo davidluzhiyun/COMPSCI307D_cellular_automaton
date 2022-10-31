@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class SimInformationDisplay {
@@ -12,6 +13,7 @@ public class SimInformationDisplay {
         "Title: " + gameTitle + "\n" +
         "Author: " + gameAuthor + "\n" +
         "Description: " + gameDescription + "\n");
+    text.setFont(Font.font("Helvetica"));
   }
 
   public Text getGraphic() {

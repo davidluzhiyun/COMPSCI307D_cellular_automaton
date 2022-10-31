@@ -29,6 +29,7 @@ public class GridDisplay {
   public GridDisplay(int rows, int cols) {
     pane = new GridPane();
     colorMap = new GridCellColorMap();
+    cellStates = new ArrayList<>();
 
     // set gap size between cells
     vGap = GUI.properties.getGUIProperty("gridCellVGap");
@@ -46,6 +47,7 @@ public class GridDisplay {
     if (cellStates.size() != rows || cellStates.get(0).size() != cols) {
       throw new RuntimeException("Updated cell state dimensions do not match!");
     }
+    this.cellStates = cellStates;
     for (int i = 0; i < rows; i++) {
       for (int j = 0; j < cols; j++) {
         GridCell cell = cellGraphics.get(i).get(j);
@@ -55,6 +57,11 @@ public class GridDisplay {
     }
   }
 
+  public List<List<Integer>> getCellStates() {
+    return cellStates;
+  }
+
+
   /**
    * Initialized grid with dummy values.
    */
@@ -63,12 +70,13 @@ public class GridDisplay {
     calculateCellDimensions();
     for (int i = 0; i < rows; i++) {
       cellGraphics.add(new ArrayList<>());
-
+      cellStates.add(new ArrayList<>());
       for (int j = 0; j < cols; j++) {
         GridCell cell = new GridCell(squareSize,
             colorMap.getColor(0));
         pane.add(cell.getGraphic(), i, j);
         cellGraphics.get(i).add(cell);
+        cellStates.get(i).add(0);
       }
     }
   }
