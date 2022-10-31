@@ -1,12 +1,7 @@
 package cellsociety;
 
 import cellsociety.controller.DataFileParser;
-import java.io.File;
-import java.io.StringReader;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Properties;
-import javax.xml.crypto.Data;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,13 +25,13 @@ class MainTest {
     }
     @Test
     void testSimFileType(){
-        Properties testType = DataFileParser.dataFileParser("data/game_of_life/blinkers.sim");
+        Properties testType = DataFileParser.parseSimFile("data/game_of_life/blinkers.sim");
     String test = "GameOfLife";
     assertTrue(testType.getProperty("Type").equals(test));
     }
     @Test
     void testSimFileAuthor(){
-        Properties testAuthor = DataFileParser.dataFileParser("data/game_of_life/blinkers.sim");
+        Properties testAuthor = DataFileParser.parseSimFile("data/game_of_life/blinkers.sim");
         String test = "John Conway";
         assertTrue(testAuthor.getProperty("Author").equals(test));
     }

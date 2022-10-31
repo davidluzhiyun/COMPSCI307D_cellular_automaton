@@ -73,7 +73,7 @@ public class Controller {
 
   /**
    *
-   * @return List of List of integers representing the state grid to be used in frontend
+   * @return List of Lists of integers representing the state grid to be used in frontend
    */
   public List<List<Integer>> makeInitialGridDisplayStatesFromStateList() {
     for (int i=1; i < initialStateList.size(); i++) {
@@ -86,7 +86,5 @@ public class Controller {
   /**
    * Communicate a changed state from the backend in the model to the frontend grid
    */
-  public void sendUpdatesToUI() {
-
-  }
+  public
 }
