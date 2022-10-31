@@ -71,6 +71,8 @@ Noteworthy features:
 
 ### Impressions
 
+* The breakdown of communication and the inclination to work independently led to parts being separated, and much harder to put together at the end
+* More thought should have been put into the structure of group meetings and goal setting so that work would be clearly defined and progress could be better measured before deadlines
 
 
 
