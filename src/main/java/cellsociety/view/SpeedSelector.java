@@ -33,7 +33,8 @@ public class SpeedSelector {
   private ImageView icon;
   private Text label;
 
-
+  private int iconHeight = 35;
+  private int iconWidth = 60;
 
 
   /**
@@ -51,8 +52,8 @@ public class SpeedSelector {
       throw new NullPointerException("Invalid button icon path");
     }
     icon = new ImageView(new Image(iconPath));
-    icon.setFitHeight(35);  //TODO: Use resources
-    icon.setFitWidth(60);   //TODO: Use resources
+    icon.setFitHeight(iconHeight);  //TODO: Use resources
+    icon.setFitWidth(iconWidth);   //TODO: Use resources
   }
 
   public void setAction(EventHandler<ActionEvent> event){

@@ -1,6 +1,8 @@
 package cellsociety.view;
 
 import cellsociety.Main;
+import cellsociety.controller.Controller;
+import cellsociety.controller.SplashController;
 import java.util.List;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -25,12 +27,14 @@ import javafx.scene.text.TextAlignment;
 
 public class SplashScreen {
   public String SPLASH_TITLE;
-  protected Scene SPLASH_SCENE;
-  protected Group SPlASH_SCREEN_ROOT;
-  protected int SPLASH_SCENE_WIDTH = 800;
-  protected int SPLASH_SCENE_HEIGHT = 500;
+  private Scene SPLASH_SCENE;
+  private Group SPlASH_SCREEN_ROOT;
+  private int SPLASH_SCENE_WIDTH = 800;
+  private int SPLASH_SCENE_HEIGHT = 500;
+  private SplashController splashController;
 
-  public SplashScreen() {
+  public SplashScreen(SplashController sc) {
+    splashController = sc;
     SPlASH_SCREEN_ROOT = new Group();
     SPLASH_SCENE = new Scene(SPlASH_SCREEN_ROOT, SPLASH_SCENE_WIDTH, SPLASH_SCENE_HEIGHT);
     SPLASH_TITLE = "Simulation Options";
@@ -61,8 +65,7 @@ public class SplashScreen {
     startButton.setId("StartButton");
     startButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
 
-    // startButton.setOnAction(event -> START THE PROGRAM;
-    startButton.setOnAction(event -> Main.startGUI());
+    startButton.setOnAction(event -> splashController.startGUIfromSplash());
 
     v.getChildren().addAll(title, pickLanguageText, languageButtons,
         pickAppText, appButtons, pickStyleText,
@@ -103,19 +106,19 @@ public class SplashScreen {
 
     Button engButton = new Button("ENGLISH");
     engButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //engButton.setOnAction(event -> );
+    engButton.setOnAction(event -> splashController.setLangChosen("English"));
     engButton.setId("EnglishButton");
     languageButtons.getChildren().add(engButton);
 
-    Button frButton = new Button("FRENCH");
-    frButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //frButton.setOnAction(event -> );
-    frButton.setId("FrenchButton");
-    languageButtons.getChildren().add(frButton);
+    Button spButton = new Button("SPANISH");
+    spButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
+    spButton.setOnAction(event -> splashController.setLangChosen("Spanish"));
+    spButton.setId("FrenchButton");
+    languageButtons.getChildren().add(spButton);
 
     Button gerButton = new Button("GERMAN");
     gerButton.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //gerButton.setOnAction(event -> );
+    gerButton.setOnAction(event -> splashController.setLangChosen("German"));
     gerButton.setId("GermanButton");
     languageButtons.getChildren().add(gerButton);
 
@@ -173,14 +176,14 @@ public class SplashScreen {
     HBox styleButtons = new HBox(5);
     styleButtons.setAlignment(Pos.CENTER);
 
-    Button firstStyle = new Button("SOME UI STYLE");
+    Button firstStyle = new Button("Dark UI");
     firstStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //firstStyle.setOnAction(event -> );
+    firstStyle.setOnAction(event -> splashController.setUIStyling("DarkTheme.css"));
     styleButtons.getChildren().add(firstStyle);
 
-    Button secondStyle = new Button("SOME OTHER UI STYLE");
+    Button secondStyle = new Button("LightTheme");
     secondStyle.setFont(Font.font("Futura", FontWeight.LIGHT, 15));
-    //secondStyle.setOnAction(event -> );
+    secondStyle.setOnAction(event -> splashController.setUIStyling("LightTheme.css"));
     styleButtons.getChildren().add(secondStyle);
 
     return styleButtons;

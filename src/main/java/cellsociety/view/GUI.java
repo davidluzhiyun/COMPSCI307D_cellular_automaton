@@ -1,5 +1,6 @@
 package cellsociety.view;
 
+import cellsociety.controller.Controller;
 import cellsociety.view.buttons.LoadFileButton;
 import cellsociety.view.buttons.SaveFileButton;
 import cellsociety.view.buttons.animation_control.PlayPauseButton;
@@ -27,11 +28,13 @@ import javafx.scene.text.Text;
  */
 public class GUI {
 
-
   // Properties
   public static final String GUI_ICON_PROPERTIES = "cellsociety.properties.GUIIcons";
+
   // Style guides
-  private static final String BUTTON_STYLEGUIDE_RESOURCE = "/cellsociety/css/JFXGraphicStyles.css";
+  public String buttonStyleguideResource = "/cellsociety/css/LightTheme.css";
+  public String languagePropsPath = "/cellsociety/ControllerResources/English.properties";
+
 
   // Set of panels that organizes GUI elements
   private BorderPane guiWindow;
@@ -42,6 +45,7 @@ public class GUI {
 
   public static final GUIPropertiesLoader properties = new GUIPropertiesLoader();
 
+  private Controller controller;
 
   // TODO: Use the game properties file instead of this information! this is merely for testing!
   private final int gridDimensions = 5;
@@ -61,7 +65,6 @@ public class GUI {
     }
   }
 
-
   /**
    * Set up the scene with all JFX graphics
    *
@@ -73,6 +76,7 @@ public class GUI {
     gridPanel = new StackPane();
     leftPanel = new VBox();
     gridContainer = new VBox();
+    controller = new Controller();
 
     // style the panels
     guiWindow.getStyleClass().add("large-panes");
@@ -92,7 +96,7 @@ public class GUI {
     Scene scene = new Scene(guiWindow, properties.getGUIProperty("guiWidth"),
         properties.getGUIProperty("guiHeight"));
     try {
-      scene.getStylesheets().add(getClass().getResource(BUTTON_STYLEGUIDE_RESOURCE).toString());
+      scene.getStylesheets().add(getClass().getResource(buttonStyleguideResource).toString());
     } catch (NullPointerException e) {
       throw new NullPointerException("Resource styleguide not found.");
     }
