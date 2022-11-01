@@ -1,7 +1,6 @@
 package cellsociety.alternativeModel;
 
 import cellsociety.alternativeModel.cell.AbstractCell;
-import cellsociety.alternativeModel.cell.CellType;
 import cellsociety.alternativeModel.cell.EmptyCell;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,51 +42,12 @@ public abstract class AbstractGameModel {
       throw e;
     }
   }
-
-  // Get the cell type of the Moore Neighbourhood, defaults to empty
-  protected Map<Coordinate, CellType> getMooreNeighbours(int X, int Y){
-    Map<Coordinate,CellType> result = new HashMap<>();
-    for (int i = Math.max(0, X-1); i <= Math.min(X + 1, maxX); i++) {
-      for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1, maxY); j++){
-        result.put(new Coordinate(i,j),safeGetCellTypeAt(i, j));
-      }
-    }
-    result.remove(new Coordinate(X,Y));
-    return result;
-  }
-
-  // Auxiliary method for getting neighbours, doesn't screen against out of bound getting
-  // because it is handled in the get neighbour methods
-  private CellType safeGetCellTypeAt(int X, int Y) {
-    AbstractCell selected = grid.get(new Coordinate(X,Y));
-    if (selected == null){
-      return CellType.EMPTY;
-    }
-    else {
-      return selected.getType();
-    }
-  }
-
-  // Get the cell type of the Von Neumann Neighbourhood, defaults to empty
-  protected Map<Coordinate, CellType> getVonNeumannNeighbours(int X, int Y){
-    Map<Coordinate,CellType> result = new HashMap<>();
-    for (int i = Math.max(0, X-1); i <= Math.min(X + 1, maxX); i++) {
-      result.put(new Coordinate(i,Y),safeGetCellTypeAt(i,Y));
-    }
-    for (int j = Math.max(0, Y-1); j <= Math.min(Y + 1, maxY); j++){
-      result.put(new Coordinate(X,j),safeGetCellTypeAt(X, j));
-    }
-    result.remove(new Coordinate(X,Y));
-    return result;
-  }
-
   // Get the cell at given coordinates, might return null for some non-stationary CA
   // Screens against out of bound get attempts
   protected AbstractCell getCellAt(int X, int Y){
     try {
-      assert X <= maxX && X >= 0;
-      assert Y <= maxY && Y >= 0;
-      return grid.get(new Coordinate(X,Y));
+      assert withinBound(X,Y);
+      return grid.get(new Coordinate(X, Y));
     }
     catch (AssertionError e){
       System.out.println(myErrorResources.getString("outOfBound"));
@@ -95,20 +55,6 @@ public abstract class AbstractGameModel {
     }
 
   }
-
-  // Put a cell at give coordinates, doesn't screen against null, out of bound
-  // put attempts will have no effect
-  protected void putCellAt(int X, int Y, AbstractCell cell){
-    try {
-      assert X <= maxX && X >= 0;
-      assert Y <= maxY && Y >= 0;
-      grid.put(new Coordinate(X, Y), cell);
-    }
-    catch (AssertionError e){
-      //do nothing
-    }
-  }
-
   // A way to completely set a new Map as grid. Screens against null input
   protected void setGrid(Map<Coordinate, AbstractCell> newGrid){
     try {
@@ -136,6 +82,80 @@ public abstract class AbstractGameModel {
       }
     }
     return output;
+  }
+
+  // Put a cell at give coordinates, doesn't screen against null, out of bound
+  // put attempts will have no effect
+  protected void putCellAt(int X, int Y, AbstractCell cell){
+    try {
+      assert X <= maxX && X >= 0;
+      assert Y <= maxY && Y >= 0;
+      grid.put(new Coordinate(X, Y), cell);
+    }
+    catch (AssertionError e){
+      //do nothing
+    }
+  }
+
+  // Auxiliary methods for constructing the neighbourhood
+  private Coordinate wrapAround (int X, int Y){
+    int x = X;
+    int y = Y;
+    if (x < 0){
+      x = maxX;
+    }
+    else if (x > maxX){
+      x = 0;
+    }
+    if (y < 0){
+      y = maxY;
+    }
+    else if (y > maxY){
+      y = 0;
+    }
+    return new Coordinate(x,y);
+  }
+  private Boolean withinBound (int X, int Y){
+    return ((X <= maxX && X >= 0) && (Y <= maxY && Y >= 0));
+  }
+
+  private void setMooreNeighbours(int X, int Y,Neighbourhood myNeighbourhood){
+    for (int i = X - 1; i <= X + 1; i = i + 2) {
+      for (int j = Y - 1; j <= Y + 1; j = j + 2){
+        if (!withinBound(i,j)){
+          Coordinate myWrap = wrapAround(i,j);
+          myNeighbourhood.putWrapAroundMooreNeighbour(myWrap.x(),myWrap.y(),getCellAt(myWrap.x(),myWrap.y()));
+        }
+        else {
+          myNeighbourhood.putMooreNeighbour(i,j,getCellAt(i, j));
+        }
+      }
+    }
+  }
+  private void setVonNeumannNeighbours(int X, int Y,Neighbourhood myNeighbourhood) {
+    for (int i = X - 1; i <= X + 1; i++) {
+      if (!withinBound(i, Y)) {
+        int wrapI = wrapAround(i, Y).x();
+        myNeighbourhood.putWrapAroundVonNeumannNeighbour(wrapI, Y, getCellAt(wrapI, Y));
+      } else {
+        myNeighbourhood.putVonNeumannNeighbour(i, Y, getCellAt(i, Y));
+      }
+    }
+    for (int j = Y - 1; j <= Y + 1; j++) {
+      if (!withinBound(X, j)) {
+        int wrapJ = wrapAround(X, j).y();
+        myNeighbourhood.putWrapAroundVonNeumannNeighbour(X, wrapJ, getCellAt(X, wrapJ));
+      } else {
+        myNeighbourhood.putVonNeumannNeighbour(X, j, getCellAt(X, j));
+      }
+    }
+  }
+
+  public ImmutableNeighbourhood getNeighbourhoodAt(int X, int Y){
+    Neighbourhood my = new Neighbourhood(X, Y);
+    setVonNeumannNeighbours(X, Y, my);
+    setMooreNeighbours(X, Y, my);
+    return my;
   }
 
   // Getters for passing this info to subclasses, where it is needed for updating

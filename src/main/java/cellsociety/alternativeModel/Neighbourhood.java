@@ -10,7 +10,7 @@ import java.util.Map;
  * Package friendly because it should only be directly accessed by game model
  * Cells should access it through interface
  */
-class Neighbourhood {
+class Neighbourhood implements ImmutableNeighbourhood{
   private Map<Coordinate, CellType> mooreNeighbourhood;
   private Map<Coordinate, CellType> vonNeumannNeighbourhood;
   private Map<Coordinate, CellType> wrapAroundMooreNeighbourhood;

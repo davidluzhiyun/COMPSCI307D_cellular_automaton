@@ -1,6 +1,7 @@
 package cellsociety.alternativeModel.cell;
 
 import cellsociety.alternativeModel.Coordinate;
+import cellsociety.alternativeModel.ImmutableNeighbourhood;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,7 @@ public abstract class StationaryCell extends AbstractCell{
 
 
   // Return a cell that the current cell will be updated into
-  public abstract StationaryCell update(Map<Coordinate,CellType> neighbours);
+  public abstract StationaryCell update(ImmutableNeighbourhood neighbourhood);
 
 
 }
