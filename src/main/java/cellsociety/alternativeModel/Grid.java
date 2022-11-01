@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
  * @author david_luzhiyun
  */
 public class Grid implements ImmutableTypeGrid{
-  public static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.properties.";
   public static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "ModelErrors";
   // Class variables
   private int maxX;

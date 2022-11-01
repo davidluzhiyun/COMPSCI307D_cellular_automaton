@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  */
 
 public abstract class AbstractGameModel {
-  public static final String DEFAULT_RESOURCE_PACKAGE = "properties.";
+  public static final String DEFAULT_RESOURCE_PACKAGE = "cellsociety.properties.";
   public static final String DEFAULT_ERRORS_RESOURCE_PACKAGE = DEFAULT_RESOURCE_PACKAGE + "ModelErrors";
   //class variables
   private Map<Coordinate, AbstractCell> grid;

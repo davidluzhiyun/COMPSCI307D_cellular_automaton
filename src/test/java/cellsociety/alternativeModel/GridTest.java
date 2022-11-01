@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 class GridTest {
   private Grid myGrid;
 
-  public GridTest(){
+  GridTest(){
     myGrid = new Grid(4,5, new DeadCell());
   }
   @Test

@@ -16,7 +16,7 @@ class StationaryGameModelGameOfLifeTest {
   private StationaryGameModel stationaryGameModelGood;
   private StationaryGameModel stationaryGameModelWrongCell;
   private Grid myBadGrid;
-  public StationaryGameModelGameOfLifeTest(){
+  StationaryGameModelGameOfLifeTest(){
     Grid myGoodGrid = new Grid(BOUND, BOUND, new DeadCell());
     myBadGrid = new Grid(BOUND,BOUND);
     for (int i = 1; i < BOUND; i++) {
