@@ -12,7 +12,7 @@ import java.util.Map;
  * The CAs this model is applicable to determines the state of its cells only on the cells
  * @author david_luzhiyun
  */
-public class StationaryGameModel extends AbstractGameModel{
+public class StationaryGameModel extends AbstractGameModel {
   //class variables
 
   public StationaryGameModel(Grid inputGrid){
@@ -32,7 +32,7 @@ public class StationaryGameModel extends AbstractGameModel{
           // Catches cases where there are cells that are not stationary
           // Down casting necessary due to grid holding AbstractCell in superclass
           assert (selected instanceof StationaryCell);
-          myFuture.put(new Coordinate(i, j), ((StationaryCell) selected).update(getMooreNeighbours(i,j)));
+          myFuture.put(new Coordinate(i, j), ((StationaryCell) selected).update(getNeighbourhoodAt(i,j)));
         }
       }
       setGrid(myFuture);
