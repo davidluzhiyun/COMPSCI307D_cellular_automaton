@@ -3,5 +3,8 @@ package cellsociety.alternativeModel.cell;
 public enum CellType {
   DEAD,
   ALIVE,
-  EMPTY
+  EMPTY,
+  FIRE,
+  LAND,
+  TREE
 }
